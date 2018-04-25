@@ -3,7 +3,8 @@ package org.scala.checklist.ast.visitors
 import org.scala.checklist.ast.nodes.BinaryOperation.BinaryOperation
 import org.scala.checklist.ast.nodes.CompareOperation.CompareOperation
 import org.scala.checklist.ast.nodes.atomic.AtomicNode
-import org.scala.checklist.ast.nodes.{ASTNode, BodyNode, ExpressionNode, TextNode}
+import org.scala.checklist.ast.nodes.operations.ExpressionNode
+import org.scala.checklist.ast.nodes.{ASTNode, BodyNode, TextNode}
 
 trait ASTVisitor[T] {
   def visitTemplateNode(text: TextNode, stmts: List[ASTNode]): T
