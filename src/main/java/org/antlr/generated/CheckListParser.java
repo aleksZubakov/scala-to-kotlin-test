@@ -1075,7 +1075,7 @@ public class CheckListParser extends Parser {
 				logical_expr(3);
 				}
 				break;
-			case T__0:
+			case CHAR:
 			case DECIMAL:
 				{
 				_localctx = new ComparatorExpressionContext(_localctx);
@@ -1173,8 +1173,8 @@ public class CheckListParser extends Parser {
 	}
 
 	public static class AtomContext extends ParserRuleContext {
-		public PlaceholderContext placeholder() {
-			return getRuleContext(PlaceholderContext.class,0);
+		public WordContext word() {
+			return getRuleContext(WordContext.class,0);
 		}
 		public TerminalNode DECIMAL() { return getToken(CheckListParser.DECIMAL, 0); }
 		public AtomContext(ParserRuleContext parent, int invokingState) {
@@ -1203,11 +1203,11 @@ public class CheckListParser extends Parser {
 			setState(157);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__0:
+			case CHAR:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(155);
-				placeholder();
+				word();
 				}
 				break;
 			case DECIMAL:
@@ -1399,7 +1399,7 @@ public class CheckListParser extends Parser {
 		"\2\2\u0094\u0093\3\2\2\2\u0094\u0095\3\2\2\2\u0095\u0096\3\2\2\2\u0096"+
 		"\u0097\5\32\16\4\u0097\u0099\3\2\2\2\u0098\u008e\3\2\2\2\u0099\u009c\3"+
 		"\2\2\2\u009a\u0098\3\2\2\2\u009a\u009b\3\2\2\2\u009b\33\3\2\2\2\u009c"+
-		"\u009a\3\2\2\2\u009d\u00a0\5\f\7\2\u009e\u00a0\7\24\2\2\u009f\u009d\3"+
+		"\u009a\3\2\2\2\u009d\u00a0\5\b\5\2\u009e\u00a0\7\24\2\2\u009f\u009d\3"+
 		"\2\2\2\u009f\u009e\3\2\2\2\u00a0\35\3\2\2\2\u00a1\u00a2\t\2\2\2\u00a2"+
 		"\37\3\2\2\2\u00a3\u00a4\t\3\2\2\u00a4!\3\2\2\2\30%+\629>DJNSY]_pw{\u0083"+
 		"\u0087\u008c\u0090\u0094\u009a\u009f";

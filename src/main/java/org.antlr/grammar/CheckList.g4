@@ -96,47 +96,45 @@ template:
     stmt+
     EOF;
 
-fragment SPACES
+SPACES
  : [ \t]+
  ;
 
-SKIP_
- : ( SPACES ) -> skip
- ;
+//SKIP_
+// : ( SPACES )
+// ;
 
 CHAR: [а-яА-Я-];
-PUNCTUATION: [.,;"];
+PUNCTUATION: [.,;"!?\\|/];
 id: CHAR+;
 
 word: CHAR+;
-text: (word | SPACES | PUNCTUATION)+;
+text: (word | SPACES | DECIMAL | PUNCTUATION);
+placeholder: '$' CHAR+;
 
 // template title/description
-heading: ('##') SPACES* heading_text=text NEWLINE;
+heading: ('##') SPACES? (text)+ NEWLINE;
 
 stmt: item | compound_stmt;
 
-item: item_text=text NEWLINE;
+item: (text | placeholder)+ NEWLINE;
 
 compound_stmt: if_stmt;
 
 // rules that parse ${чтоТо < чегоТо}
-if_stmt: '$' '{' logical_expr '}' body+;
+if_stmt: '$' '{' logical_expr '}' body;
 
 body: NEWLINE INDENT stmt+ DEDENT;
 logical_expr
- : LPAREN logical_expr RPAREN                     #parenExpression
+ : LPAREN SPACES? logical_expr SPACES? RPAREN                     #parenExpression
  | NOT logical_expr                               #notExpression
- | left=atom op=comparator right=atom             #comparatorExpression
- | left=logical_expr op=binary right=logical_expr #binaryExpression
- | bool                                           #boolExpression
- | DECIMAL                                        #decimalExpression
+ | left=atom SPACES? op=comparator SPACES? right=atom {}             #comparatorExpression
+ | left=logical_expr SPACES? op=binary SPACES? right=logical_expr #binaryExpression
  ;
 
 atom
   : word
   | DECIMAL
-  | '(' logical_expr ')'
   ;
 
 comparator
@@ -147,15 +145,9 @@ binary
  : AND | OR
  ;
 
-bool
- : TRUE | FALSE
- ;
-
 AND        : '&&' ;
 OR         : '||' ;
 NOT        : '!';
-TRUE       : 'TRUE' ;
-FALSE      : 'FALSE' ;
 GT         : '>' ;
 GE         : '>=' ;
 LT         : '<' ;
@@ -164,13 +156,6 @@ EQ         : '==' ;
 LPAREN     : '(' ;
 RPAREN     : ')' ;
 DECIMAL    : '-'? [0-9]+ ( '.' [0-9]+ )? ;
-//IDENTIFIER : [a-zA-Z_] [a-zA-Z_0-9]* ;
-//WS         : [ \r\t\u000C\n]+ -> skip;
-
-
-
-//compare
-
 
 NEWLINE
  : ( {atStartOfInput()}?   SPACES

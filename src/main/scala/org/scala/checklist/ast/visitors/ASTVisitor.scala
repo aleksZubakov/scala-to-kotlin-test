@@ -11,7 +11,7 @@ trait ASTVisitor[T] {
 
   def visitItemNode(text: List[TextNode]): T
 
-  def visitIfNode(condition: ASTNode, bodyNode: BodyNode): T
+  def visitIfNode(condition: ExpressionNode, bodyNode: BodyNode): T
 
   def visitTextNode(text: String): T
 
@@ -24,5 +24,7 @@ trait ASTVisitor[T] {
   def visitBinaryOpNode(left: ExpressionNode, op: BinaryOperation, right: ExpressionNode): T
 
   def visitCompareOpNode(left: AtomicNode, op: CompareOperation, right: AtomicNode): T
+
+  def visitNotOpNode(expr: ExpressionNode): T
 
 }
