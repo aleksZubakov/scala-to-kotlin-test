@@ -41,6 +41,12 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitText(CheckListParser.TextContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CheckListParser#placeholder}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlaceholder(CheckListParser.PlaceholderContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CheckListParser#heading}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -84,20 +90,6 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBinaryExpression(CheckListParser.BinaryExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code decimalExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDecimalExpression(CheckListParser.DecimalExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code boolExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolExpression(CheckListParser.BoolExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code notExpression}
 	 * labeled alternative in {@link CheckListParser#logical_expr}.
 	 * @param ctx the parse tree
@@ -136,10 +128,4 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBinary(CheckListParser.BinaryContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CheckListParser#bool}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBool(CheckListParser.BoolContext ctx);
 }

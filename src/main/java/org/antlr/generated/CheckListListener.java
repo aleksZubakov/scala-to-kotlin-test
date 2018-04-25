@@ -58,6 +58,16 @@ public interface CheckListListener extends ParseTreeListener {
 	 */
 	void exitText(CheckListParser.TextContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CheckListParser#placeholder}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlaceholder(CheckListParser.PlaceholderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CheckListParser#placeholder}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlaceholder(CheckListParser.PlaceholderContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CheckListParser#heading}.
 	 * @param ctx the parse tree
 	 */
@@ -130,30 +140,6 @@ public interface CheckListListener extends ParseTreeListener {
 	 */
 	void exitBinaryExpression(CheckListParser.BinaryExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code decimalExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterDecimalExpression(CheckListParser.DecimalExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code decimalExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitDecimalExpression(CheckListParser.DecimalExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code boolExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolExpression(CheckListParser.BoolExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code boolExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolExpression(CheckListParser.BoolExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code notExpression}
 	 * labeled alternative in {@link CheckListParser#logical_expr}.
 	 * @param ctx the parse tree
@@ -219,14 +205,4 @@ public interface CheckListListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBinary(CheckListParser.BinaryContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CheckListParser#bool}.
-	 * @param ctx the parse tree
-	 */
-	void enterBool(CheckListParser.BoolContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CheckListParser#bool}.
-	 * @param ctx the parse tree
-	 */
-	void exitBool(CheckListParser.BoolContext ctx);
 }

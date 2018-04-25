@@ -76,6 +76,18 @@ public class CheckListBaseListener implements CheckListListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPlaceholder(CheckListParser.PlaceholderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlaceholder(CheckListParser.PlaceholderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterHeading(CheckListParser.HeadingContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -160,30 +172,6 @@ public class CheckListBaseListener implements CheckListListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDecimalExpression(CheckListParser.DecimalExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDecimalExpression(CheckListParser.DecimalExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBoolExpression(CheckListParser.BoolExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBoolExpression(CheckListParser.BoolExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterNotExpression(CheckListParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -251,18 +239,6 @@ public class CheckListBaseListener implements CheckListListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBinary(CheckListParser.BinaryContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBool(CheckListParser.BoolContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBool(CheckListParser.BoolContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
