@@ -13,7 +13,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
 
   override def visitTemplate(ctx: CheckListParser.TemplateContext): ASTNode = {
     val headingText = visitHeading(ctx.heading)
-    val stmts = ctx.stmt.toList.map(visitStmt)
+    val stmts = ctx.stmt.map(visitStmt).toList
 
     new TemplateNode(headingText, stmts)
   }
@@ -30,8 +30,9 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   override def visitBinaryExpression(ctx: CheckListParser.BinaryExpressionContext): ExpressionNode = {
     val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
     val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
-    val opType = Option(ctx.op.AND())
-      .getOrElse(ctx.op.OR()).getSymbol.getType
+
+    val op = ctx.op
+    val opType = firstNotNull(op.AND(), op.OR()).getSymbol.getType
 
     opType match {
       case CheckListParser.AND => new BinaryOpNode(left, BinaryOperation.AND, right)
@@ -53,24 +54,23 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
 
     val op = ctx.op
 
-    val opType = Option(op.LT())
-      .orElse(Option(op.LE()))
-      .orElse(Option(op.GT()))
-      .orElse(Option(op.GE()))
-      .orElse(Option(op.EQ()))
-      .get
+    val opType = firstNotNull(op.LT(), op.GT(), op.EQ(), op.LE(), op.GE())
       .getSymbol.getType
 
     opType match {
       case CheckListParser.LT => new CompareOpNode(left, CompareOperation.LT, right)
-      case CheckListParser.LE => new CompareOpNode(left, CompareOperation.LT, right)
-      case CheckListParser.GT => new CompareOpNode(left, CompareOperation.LT, right)
-      case CheckListParser.GE => new CompareOpNode(left, CompareOperation.LT, right)
-      case CheckListParser.EQ => new CompareOpNode(left, CompareOperation.LT, right)
+      case CheckListParser.LE => new CompareOpNode(left, CompareOperation.LE, right)
+      case CheckListParser.GT => new CompareOpNode(left, CompareOperation.GT, right)
+      case CheckListParser.GE => new CompareOpNode(left, CompareOperation.GE, right)
+      case CheckListParser.EQ => new CompareOpNode(left, CompareOperation.EQ, right)
     }
 
   }
 
+
+  private def firstNotNull(ops: TerminalNode*) = {
+    ops.find(_ != null).get
+  }
 
   override def visitCompound_stmt(ctx: CheckListParser.Compound_stmtContext): ASTNode = {
     val child = ctx.children.get(0)
@@ -101,7 +101,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
 
 
   override def visitHeading(ctx: CheckListParser.HeadingContext): TextNode = {
-    val collectedText = ctx.children.subList(1, ctx.children.size()).toList.flatMap {
+    val collectedText = ctx.children.subList(1, ctx.children.size()).flatMap {
       case text: CheckListParser.TextContext => visitText(text).text
       case _ => ""
     }.mkString("")
@@ -110,7 +110,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
 
 
   override def visitText(ctx: CheckListParser.TextContext): TextNode = {
-    val collectedText = ctx.children.toList.flatMap {
+    val collectedText = ctx.children.flatMap {
       case node: TerminalNode => node.toString
       case word: CheckListParser.WordContext => word.CHAR.toList.mkString("")
     }.mkString("")
@@ -119,12 +119,12 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   }
 
   override def visitPlaceholder(ctx: CheckListParser.PlaceholderContext): TextNode = {
-    val text = ctx.CHAR.toList.mkString("")
+    val text = ctx.CHAR.mkString("")
     new PlaceholderNode(text)
   }
 
   override def visitItem(ctx: CheckListParser.ItemContext): ASTNode = {
-    val nodes = ctx.children.toList
+    val nodes = ctx.children
       .filter(node => {
         node.isInstanceOf[CheckListParser.TextContext] ||
           node.isInstanceOf[CheckListParser.PlaceholderContext]
@@ -133,6 +133,6 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
         case text: CheckListParser.TextContext => visitText(text)
         case placeholder: CheckListParser.PlaceholderContext => visitPlaceholder(placeholder)
       }
-    new ItemNode(nodes)
+    new ItemNode(nodes.toList)
   }
 }
