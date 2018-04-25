@@ -1,4 +1,4 @@
-package org.scala.checklist.ast.visitors
+package org.scala.checklist.ast.visitors.base
 
 import org.scala.checklist.ast.nodes.BinaryOperation.BinaryOperation
 import org.scala.checklist.ast.nodes.CompareOperation.CompareOperation
