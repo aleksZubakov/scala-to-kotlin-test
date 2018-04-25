@@ -100,45 +100,68 @@ SPACES
  : [ \t]+
  ;
 
-//SKIP_
-// : ( SPACES )
-// ;
-
-CHAR: [а-яА-Я-];
+CHAR: [а-яА-Я];
 PUNCTUATION: [.,;"!?\\|/];
-id: CHAR+;
 
 word: CHAR+;
 text: (word | SPACES | DECIMAL | PUNCTUATION);
-placeholder: '$' CHAR+;
+placeholder: simple_placeholder| placeholder_with_body;
+simple_placeholder: '$' word;
 
+placeholder_with_body: '$' '{' SPACES? placeholder_body SPACES? '}';
+placeholder_body: arithmetic_expr;
+
+function_call: func_name=word '(' var_ref ')';
+var_ref: rvalue? | rvalue SPACES? (',' SPACES? rvalue)*;
+
+var_assign: var_def ':' SPACES? varValue=rvalue;
+description: text+;
+var_def: description ':' SPACES? lval=word SPACES? ':' SPACES? varType=word SPACES?;
+rvalue: DECIMAL | word; //| arithmetic_expr;
+
+func_def: '$$' SPACES? name=word LPAREN args RPAREN body;
+args: arg? SPACES? (',' SPACES? arg)*; // check fun(, arg)
+arg: SPACES? lval=word SPACES? ':' SPACES? varType=word SPACES?;
 // template title/description
 heading: ('##') SPACES? (text)+ NEWLINE;
 
 stmt: item | compound_stmt;
 
-item: (text | placeholder)+ NEWLINE;
+item: (text | placeholder | function_call)+ NEWLINE;
 
-compound_stmt: if_stmt;
+compound_stmt: if_stmt | var_assign | func_def;
 
 // rules that parse ${чтоТо < чегоТо}
 if_stmt: '$' '{' logical_expr '}' body;
 
 body: NEWLINE INDENT stmt+ DEDENT;
 logical_expr
- : LPAREN SPACES? logical_expr SPACES? RPAREN                     #parenExpression
- | NOT logical_expr                               #notExpression
- | left=atom SPACES? op=comparator SPACES? right=atom {}             #comparatorExpression
- | left=logical_expr SPACES? op=binary SPACES? right=logical_expr #binaryExpression
+ : LPAREN SPACES?    logical_expr SPACES? RPAREN                    #parenExpression
+ | NOT               logical_expr                                   #notExpression
+ | left=atom SPACES? op=comparator SPACES? right=atom {}            #comparatorAtom
+ | left=logical_expr SPACES? op=binary SPACES? right=logical_expr   #binaryExpression
+
+;
+
+arithmetic_expr
+ : left=arithmetic_expr SPACES? op=arithmetic  SPACES? right=arithmetic_expr    # arithmeticExpression
+ | LPAREN SPACES? arithmetic_expr SPACES? RPAREN            # arithmeticExpressionParens
+ | MINUS arithmetic_expr                                    # arithmeticExpressionNegation
+ | atom                                                     # arithmeticAtomExpression
  ;
 
 atom
   : word
   | DECIMAL
+  | '(' SPACES? arithmetic_expr SPACES? ')'
   ;
 
 comparator
  : GT | GE | LT | LE | EQ
+ ;
+
+arithmetic
+ : MULT | DIV | PLUS | MINUS
  ;
 
 binary
@@ -155,7 +178,14 @@ LE         : '<=' ;
 EQ         : '==' ;
 LPAREN     : '(' ;
 RPAREN     : ')' ;
-DECIMAL    : '-'? [0-9]+ ( '.' [0-9]+ )? ;
+MULT  : '*' ;
+DIV   : '/' ;
+PLUS  : '+' ;
+MINUS : '-' ;
+
+
+
+DECIMAL    : '-'?[0-9]+ ( '.' [0-9]+ )? ;
 
 NEWLINE
  : ( {atStartOfInput()}?   SPACES

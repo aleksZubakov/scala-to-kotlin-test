@@ -23,12 +23,6 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTemplate(CheckListParser.TemplateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#id}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitId(CheckListParser.IdContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CheckListParser#word}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -46,6 +40,78 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPlaceholder(CheckListParser.PlaceholderContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#simple_placeholder}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimple_placeholder(CheckListParser.Simple_placeholderContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#placeholder_with_body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlaceholder_with_body(CheckListParser.Placeholder_with_bodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#placeholder_body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlaceholder_body(CheckListParser.Placeholder_bodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#function_call}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction_call(CheckListParser.Function_callContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#var_ref}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar_ref(CheckListParser.Var_refContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#var_assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar_assign(CheckListParser.Var_assignContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#description}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescription(CheckListParser.DescriptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#var_def}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar_def(CheckListParser.Var_defContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#rvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRvalue(CheckListParser.RvalueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#func_def}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc_def(CheckListParser.Func_defContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#args}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgs(CheckListParser.ArgsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#arg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArg(CheckListParser.ArgContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CheckListParser#heading}.
 	 * @param ctx the parse tree
@@ -104,12 +170,40 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenExpression(CheckListParser.ParenExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code comparatorExpression}
+	 * Visit a parse tree produced by the {@code comparatorAtom}
 	 * labeled alternative in {@link CheckListParser#logical_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparatorExpression(CheckListParser.ComparatorExpressionContext ctx);
+	T visitComparatorAtom(CheckListParser.ComparatorAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arithmeticExpressionParens}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arithmeticAtomExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arithmeticExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticExpression(CheckListParser.ArithmeticExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arithmeticExpressionNegation}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CheckListParser#atom}.
 	 * @param ctx the parse tree
@@ -122,6 +216,12 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitComparator(CheckListParser.ComparatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#arithmetic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmetic(CheckListParser.ArithmeticContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CheckListParser#binary}.
 	 * @param ctx the parse tree

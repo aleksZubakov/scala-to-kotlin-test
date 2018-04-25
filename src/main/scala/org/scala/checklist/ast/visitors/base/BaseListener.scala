@@ -1,18 +1,19 @@
 package org.scala.checklist.ast.visitors.base
 
-import org.scala.checklist.ast.nodes.BinaryOperation.BinaryOperation
-import org.scala.checklist.ast.nodes.CompareOperation.CompareOperation
-import org.scala.checklist.ast.nodes.atomic.AtomicNode
+import org.scala.checklist.ast.nodes.item.{ItemElementNode, TextNode}
+import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOperation
+import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
 import org.scala.checklist.ast.nodes.operations.ExpressionNode
-import org.scala.checklist.ast.nodes.{ASTNode, BodyNode, TextNode}
+import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
+import org.scala.checklist.ast.nodes.{ASTNode, BodyNode}
 
-class BaseListener extends ASTVisitor[Unit]{
+class BaseListener extends ASTVisitor[Unit] {
   override def visitTemplateNode(text: TextNode, stmts: List[ASTNode]): Unit = {
     text.accept(this)
     stmts.foreach(_.accept(this))
   }
 
-  override def visitItemNode(text: List[TextNode]): Unit = {
+  override def visitItemNode(text: List[ItemElementNode]): Unit = {
     text.foreach(_.accept(this))
   }
 
@@ -31,21 +32,28 @@ class BaseListener extends ASTVisitor[Unit]{
 
   override def visitVarNode(name: String): Unit = {}
 
-  override def visitDecimalConstNode(value: Double): Unit = {
+  override def visitDecimalConstNode(value: Double): Unit = {}
 
-  }
-
-  override def visitBinaryOpNode(left: ExpressionNode, op: BinaryOperation, right: ExpressionNode): Unit = {
+  override def visitBinaryOpNode(left: ExpressionNode, op: LogicalOperation, right: ExpressionNode): Unit = {
     left.accept(this)
     right.accept(this)
   }
 
-  override def visitCompareOpNode(left: AtomicNode, op: CompareOperation, right: AtomicNode): Unit = {
+  override def visitCompareOpNode(left: ExpressionNode, op: CompareOperation, right: ExpressionNode): Unit = {
     left.accept(this)
     right.accept(this)
   }
 
   override def visitNotOpNode(expr: ExpressionNode): Unit = {
+    expr.accept(this)
+  }
+
+  override def visitArithmeticOpNode(left: ExpressionNode, op: ArithmeticOperation, right: ExpressionNode): Unit = {
+    left.accept(this)
+    right.accept(this)
+  }
+
+  override def visitNegationOpNode(expr: ExpressionNode): Unit = {
     expr.accept(this)
   }
 }

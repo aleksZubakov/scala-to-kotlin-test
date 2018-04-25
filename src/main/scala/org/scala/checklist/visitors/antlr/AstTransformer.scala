@@ -1,10 +1,13 @@
 package org.scala.checklist.visitors.antlr
 
 import org.antlr.generated._
-import org.antlr.v4.runtime.tree.TerminalNode
+import org.antlr.v4.runtime.tree.{ParseTree, TerminalNode}
 import org.scala.checklist.ast.nodes._
-import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarNode}
-import org.scala.checklist.ast.nodes.operations.{BinaryOpNode, CompareOpNode, ExpressionNode, NotOpNode}
+import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode}
+import org.scala.checklist.ast.nodes.item.{ItemElementNode, ItemNode, PlaceholderNode, TextNode}
+import org.scala.checklist.ast.nodes.operations._
+import org.scala.checklist.config.VariableType
+import org.scala.checklist.config.VariableType.VariableType
 
 import scala.collection.JavaConversions._
 
@@ -32,11 +35,11 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
 
     val op = ctx.op
-    val opType = firstNotNull(op.AND(), op.OR()).getSymbol.getType
+    val opType = firstNotNull(op.AND(), op.OR()).asInstanceOf[TerminalNode].getSymbol.getType
 
     opType match {
-      case CheckListParser.AND => new BinaryOpNode(left, BinaryOperation.AND, right)
-      case CheckListParser.OR => new BinaryOpNode(left, BinaryOperation.OR, right)
+      case CheckListParser.AND => new LogicalOpNode(left, LogicalOperation.AND, right)
+      case CheckListParser.OR => new LogicalOpNode(left, LogicalOperation.OR, right)
     }
   }
 
@@ -48,14 +51,14 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     ctx.logical_expr().accept(this).asInstanceOf[ExpressionNode]
   }
 
-  override def visitComparatorExpression(ctx: CheckListParser.ComparatorExpressionContext): ExpressionNode = {
-    val left = ctx.left.accept(this).asInstanceOf[AtomicNode]
-    val right = ctx.right.accept(this).asInstanceOf[AtomicNode]
+  override def visitComparatorAtom(ctx: CheckListParser.ComparatorAtomContext): ExpressionNode = {
+    val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
+    val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
 
     val op = ctx.op
 
     val opType = firstNotNull(op.LT(), op.GT(), op.EQ(), op.LE(), op.GE())
-      .getSymbol.getType
+      .asInstanceOf[TerminalNode].getSymbol.getType
 
     opType match {
       case CheckListParser.LT => new CompareOpNode(left, CompareOperation.LT, right)
@@ -67,24 +70,55 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
 
   }
 
-
-  private def firstNotNull(ops: TerminalNode*) = {
+  private def firstNotNull(ops: ParseTree*) = {
     ops.find(_ != null).get
   }
 
   override def visitCompound_stmt(ctx: CheckListParser.Compound_stmtContext): ASTNode = {
-    val child = ctx.children.get(0)
+    val child = firstNotNull(ctx.if_stmt(), ctx.var_assign(), ctx.func_def())
     child match {
-      case ifStmt: CheckListParser.If_stmtContext => visitIf_stmt(ifStmt)
+      case ifStmt: CheckListParser.If_stmtContext => ifStmt.accept(this)
+      case varAssign: CheckListParser.Var_assignContext => varAssign.accept(this)
+      case funcDef: CheckListParser.Func_defContext => funcDef.accept(this)
     }
   }
 
-  override def visitAtom(ctx: CheckListParser.AtomContext): AtomicNode = {
-    val child = ctx.children.get(0)
+  override def visitAtom(ctx: CheckListParser.AtomContext): ExpressionNode = {
+    val child = firstNotNull(ctx.DECIMAL(), ctx.arithmetic_expr(), ctx.word())
     child match {
-      case word: CheckListParser.WordContext => new VarNode(word.CHAR.toList.mkString(""))
+      case word: CheckListParser.WordContext => new VarReferenceNode(wordToString(word))
+      case expr: CheckListParser.Arithmetic_exprContext => expr.accept(this).asInstanceOf[ExpressionNode]
       case decimal: TerminalNode => new DecimalConstNode(decimal.toString.toDouble)
     }
+  }
+
+  override def visitArithmeticExpressionParens(ctx: CheckListParser.ArithmeticExpressionParensContext): ExpressionNode = {
+    ctx.arithmetic_expr().accept(this).asInstanceOf[ExpressionNode]
+  }
+
+  override def visitArithmeticAtomExpression(ctx: CheckListParser.ArithmeticAtomExpressionContext): ExpressionNode = {
+    ctx.atom().accept(this).asInstanceOf[ExpressionNode]
+  }
+
+  override def visitArithmeticExpression(ctx: CheckListParser.ArithmeticExpressionContext): ASTNode = {
+    val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
+    val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
+
+    val op = ctx.op
+    val opType = firstNotNull(op.DIV(), op.MINUS(), op.PLUS(), op.MULT())
+      .asInstanceOf[TerminalNode].getSymbol.getType
+
+    opType match {
+      case CheckListParser.MULT => new ArithmeticOpNode(left, ArithmeticOperation.MULT, right)
+      case CheckListParser.DIV => new ArithmeticOpNode(left, ArithmeticOperation.DIV, right)
+      case CheckListParser.PLUS => new ArithmeticOpNode(left, ArithmeticOperation.PLUS, right)
+      case CheckListParser.MINUS => new ArithmeticOpNode(left, ArithmeticOperation.MINUS, right)
+    }
+
+  }
+
+  override def visitArithmeticExpressionNegation(ctx: CheckListParser.ArithmeticExpressionNegationContext): ExpressionNode = {
+    new NegationOpNode(ctx.arithmetic_expr.accept(this).asInstanceOf[ExpressionNode])
   }
 
   override def visitIf_stmt(ctx: CheckListParser.If_stmtContext): ASTNode = {
@@ -112,15 +146,82 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   override def visitText(ctx: CheckListParser.TextContext): TextNode = {
     val collectedText = ctx.children.flatMap {
       case node: TerminalNode => node.toString
-      case word: CheckListParser.WordContext => word.CHAR.toList.mkString("")
+      case word: CheckListParser.WordContext => wordToString(word)
     }.mkString("")
 
     new TextNode(collectedText)
   }
 
-  override def visitPlaceholder(ctx: CheckListParser.PlaceholderContext): TextNode = {
-    val text = ctx.CHAR.mkString("")
-    new PlaceholderNode(text)
+  override def visitPlaceholder(ctx: CheckListParser.PlaceholderContext): ItemElementNode = {
+    val expr = firstNotNull(ctx.simple_placeholder(), ctx.placeholder_with_body())
+    expr.accept(this).asInstanceOf[PlaceholderNode]
+  }
+
+  override def visitSimple_placeholder(ctx: CheckListParser.Simple_placeholderContext): PlaceholderNode = {
+    val varRef = new VarReferenceNode(wordToString(ctx.word()))
+    new PlaceholderNode(varRef)
+  }
+
+  override def visitPlaceholder_with_body(ctx: CheckListParser.Placeholder_with_bodyContext): PlaceholderNode = {
+    val expr = ctx.placeholder_body().accept(this).asInstanceOf[ExpressionNode]
+    new PlaceholderNode(expr)
+  }
+
+  override def visitPlaceholder_body(ctx: CheckListParser.Placeholder_bodyContext): ExpressionNode = {
+    ctx.arithmetic_expr().accept(this).asInstanceOf[ExpressionNode]
+  }
+
+
+  override def visitFunction_call(ctx: CheckListParser.Function_callContext): FuncCallNode = {
+    val funName = wordToString(ctx.func_name)
+    val args = ctx.var_ref.rvalue.map(_.accept(this).asInstanceOf[AtomicNode])
+    new FuncCallNode(funName, args.toList)
+  }
+
+  override def visitVar_assign(ctx: CheckListParser.Var_assignContext): ASTNode = {
+    val varDef = ctx.var_def().accept(this).asInstanceOf[VarDefinitionNode]
+    val rValue = visitRvalue(ctx.rvalue())
+
+    new VarAssignmentNode(varDef, rValue)
+  }
+
+
+  override def visitVar_def(ctx: CheckListParser.Var_defContext): ASTNode = {
+    val varDescription = ctx.description().text.flatMap(visitText(_).text).mkString("")
+    val (varName, varType) = varDef(ctx.lval, ctx.varType)
+    new VarDefinitionNode(varDescription, varName, varType)
+  }
+
+  def varDef(lval: CheckListParser.WordContext, variableType: CheckListParser.WordContext): (String, VariableType) = {
+    val varName = wordToString(lval)
+    val varType = wordToString(variableType).toLowerCase
+
+
+    varType match {
+      case "число" => (varName, VariableType.Numeric)
+      case "строка" => (varName, VariableType.String)
+    }
+  }
+
+  override def visitRvalue(ctx: CheckListParser.RvalueContext): AtomicNode = {
+    val op = firstNotNull(ctx.DECIMAL(), ctx.word())
+    op match {
+      case decimal: TerminalNode => new DecimalConstNode(decimal.toString.toDouble)
+      case word: CheckListParser.WordContext => new VarReferenceNode(wordToString(word))
+    }
+  }
+
+  override def visitFunc_def(ctx: CheckListParser.Func_defContext): ASTNode = {
+    val args = ctx.args.arg.map(visitArg)
+    val body = visitBody(ctx.body())
+    val name = wordToString(ctx.name)
+
+    new FuncDefinitionNode(name, args.toList, body)
+  }
+
+  override def visitArg(ctx: CheckListParser.ArgContext): VarDefinitionNode = {
+    val (varName, varType) = varDef(ctx.lval, ctx.varType)
+    new VarDefinitionNode("", varName, varType)
   }
 
   override def visitItem(ctx: CheckListParser.ItemContext): ASTNode = {
@@ -135,4 +236,6 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
       }
     new ItemNode(nodes.toList)
   }
+
+  def wordToString(word: CheckListParser.WordContext): String = word.CHAR.toList.mkString("")
 }
