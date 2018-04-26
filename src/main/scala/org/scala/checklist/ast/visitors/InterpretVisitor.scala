@@ -147,6 +147,10 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
         }
       }
 
+      case not: NotOpNode => {
+        !evaluateLogicalExpression(not.expr, context)
+      }
+
     }
   }
 
