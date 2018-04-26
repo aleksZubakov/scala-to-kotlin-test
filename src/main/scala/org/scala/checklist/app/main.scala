@@ -2,7 +2,7 @@ package org.scala.checklist.app
 
 import org.antlr.generated._
 import org.antlr.v4.runtime.{CharStreams, CommonTokenStream}
-import org.scala.checklist.ast.visitors.base.{InterpretContext, InterpretVisitor}
+import org.scala.checklist.ast.visitors.{InterpretContext, InterpretVisitor}
 import org.scala.checklist.checkers.{FunctionSignatureChecker, SignatureCheckerContext, SimpleTypeChecker}
 import org.scala.checklist.config.{Config, ConfigEntry}
 import org.scala.checklist.visitors.antlr.AstTransformer

@@ -20,6 +20,7 @@ object Config {
       val varName = cols(0)
 
 
+
       val varType = parseVarType(cols(1))
       val varValue = if (cols.length < 3) {
         varName

@@ -1,4 +1,4 @@
-package org.scala.checklist.ast.visitors.base
+package org.scala.checklist.ast.visitors
 
 import org.scala.checklist.ast.nodes.atomic.AtomicNode
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, TextNode}
@@ -39,5 +39,5 @@ trait ASTVisitor[T, -G] {
 
   def visitFuncCallNode(funcReference: String, args: List[AtomicNode], context: G): T
 
-  def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode, context: G): T
+  def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode, context: G): T
 }

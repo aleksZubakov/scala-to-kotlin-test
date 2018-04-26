@@ -8,7 +8,7 @@ import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOp
 import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
 import org.scala.checklist.ast.nodes.operations._
-import org.scala.checklist.ast.visitors.base.ASTVisitor
+import org.scala.checklist.ast.visitors.ASTVisitor
 import org.scala.checklist.config.VariableType
 import org.scala.checklist.config.VariableType.VariableType
 
@@ -121,7 +121,7 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
     VariableType.Null
   }
 
-  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode,
+  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode,
                                   context: Map[String, VariableType]): VariableType = {
     VariableType.Null
   }

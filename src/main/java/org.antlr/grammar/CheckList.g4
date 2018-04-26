@@ -117,7 +117,7 @@ var_ref: rvalue? | rvalue SPACES? (',' SPACES? rvalue)*;
 var_assign: var_def ':' SPACES? varValue=rvalue NEWLINE;
 description: text+;
 var_def: description ':' SPACES? lval=word SPACES? ':' SPACES? varType=word SPACES?;
-rvalue: DECIMAL | word; //| arithmetic_expr;
+rvalue: DECIMAL | word | arithmetic_expr;
 
 func_def: '$$' SPACES? name=word LPAREN args RPAREN body;
 args: arg? SPACES? (',' SPACES? arg)*; // check fun(, arg)

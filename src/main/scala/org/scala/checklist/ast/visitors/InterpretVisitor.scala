@@ -1,4 +1,4 @@
-package org.scala.checklist.ast.visitors.base
+package org.scala.checklist.ast.visitors
 
 import org.scala.checklist.ast.nodes._
 import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode}
@@ -28,7 +28,7 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
         val args = it.arguments.map {
           arg => (arg.varName, arg.varType)
         }
-        val InterpretContext(howManySpaces, funcTable, varTable) = context
+        val InterpretContext(howManySpaces, funcTable, varTable) = globalContext
         val newFuncTable = funcTable + (it.funcName -> (args, it.body))
         globalContext = InterpretContext(howManySpaces, newFuncTable, varTable)
         it.accept(this, globalContext)
@@ -36,14 +36,14 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
 
       case varAssign: VarAssignmentNode => {
         val varDef = varAssign.varDefinition
-        val InterpretContext(spaces, funcTable, varTable) = context
+        val InterpretContext(spaces, funcTable, varTable) = globalContext
 
-        val value = unpackFromAtomic(varAssign.value, context)
+        val value = unpackFromExpression(varAssign.value, globalContext)
         val newVariableTable = varTable + (varDef.varName -> (varDef.varType, value))
         globalContext = InterpretContext(spaces, funcTable, newVariableTable)
       }
 
-      case stmt => stmt.accept(this, context)
+      case stmt => stmt.accept(this, globalContext)
       case el => el.accept(this, globalContext)
     }
 
@@ -80,6 +80,10 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
         val (_, value) = variableTable(varName)
         print(value)
       }
+      case arithm: ArithmeticOpNode => {
+        val res = evaluateArithmeticExpression(arithm, context)
+        print(res)
+      }
       case exp => exp.accept(this, context)
     }
   }
@@ -92,7 +96,7 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
 
     val (funcSignature, funcBody) = functionTable(funcReference)
     val argNames = funcSignature
-    val values = args.map(unpackFromAtomic(_, context))
+    val values = args.map(unpackFromExpression(_, context))
 
     val newVariables = argNames.zip(values).map {
       case ((name: String, varType: VariableType), value: String) => {
@@ -146,11 +150,15 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
     }
   }
 
-  def unpackFromAtomic(expr: AtomicNode, context: InterpretContext): String = expr match {
+  def unpackFromExpression(expr: ExpressionNode, context: InterpretContext): String = expr match {
     case dec: DecimalConstNode => dec.value
     case varRef: VarReferenceNode => {
       val InterpretContext(_, _, variableTable) = context
       variableTable(varRef.name)._2
+    }
+    case arithm: ArithmeticOpNode => {
+      val value = evaluateArithmeticExpression(arithm, context)
+      value.toString
     }
 
   }
@@ -190,6 +198,7 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
     }
   }
 
+  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode, context: InterpretContext): Unit = ???
 
   override def visitVarReferenceNode(name: String, context: InterpretContext): Unit = ???
 
@@ -207,5 +216,4 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
 
   override def visitNegationOpNode(expr: ExpressionNode, context: InterpretContext): Unit = ???
 
-  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode, context: InterpretContext): Unit = ???
 }

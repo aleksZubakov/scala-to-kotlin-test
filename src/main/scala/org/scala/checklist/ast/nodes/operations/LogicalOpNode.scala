@@ -1,7 +1,7 @@
 package org.scala.checklist.ast.nodes.operations
 
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
-import org.scala.checklist.ast.visitors.base.ASTVisitor
+import org.scala.checklist.ast.visitors.ASTVisitor
 
 class LogicalOpNode(val left: LogicalOpNode, val op: LogicalOperation,
                     val right: LogicalOpNode) extends BooleanOpNode {

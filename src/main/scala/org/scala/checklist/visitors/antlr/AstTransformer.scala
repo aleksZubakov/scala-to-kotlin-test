@@ -100,7 +100,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     ctx.atom().accept(this).asInstanceOf[ExpressionNode]
   }
 
-  override def visitArithmeticExpression(ctx: CheckListParser.ArithmeticExpressionContext): ASTNode = {
+  override def visitArithmeticExpression(ctx: CheckListParser.ArithmeticExpressionContext): ArithmeticOpNode = {
     val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
     val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
 
@@ -203,11 +203,12 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     }
   }
 
-  override def visitRvalue(ctx: CheckListParser.RvalueContext): AtomicNode = {
-    val op = firstNotNull(ctx.DECIMAL(), ctx.word())
+  override def visitRvalue(ctx: CheckListParser.RvalueContext): ExpressionNode = {
+    val op = firstNotNull(ctx.DECIMAL(), ctx.word(), ctx.arithmetic_expr())
     op match {
       case decimal: TerminalNode => new DecimalConstNode(decimal.toString)
       case word: CheckListParser.WordContext => new VarReferenceNode(wordToString(word))
+      case expr: CheckListParser.ArithmeticExpressionContext => visitArithmeticExpression(expr)
     }
   }
 

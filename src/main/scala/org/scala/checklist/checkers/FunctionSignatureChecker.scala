@@ -8,7 +8,7 @@ import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOp
 import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
 import org.scala.checklist.ast.nodes.operations.{BooleanOpNode, ExpressionNode, LogicalOpNode}
-import org.scala.checklist.ast.visitors.base.ASTVisitor
+import org.scala.checklist.ast.visitors.ASTVisitor
 import org.scala.checklist.checkers.ScopeTableTypes.{FunctionTable, VariableTable}
 import org.scala.checklist.config.VariableType
 import org.scala.checklist.config.VariableType.VariableType
@@ -148,7 +148,7 @@ class FunctionSignatureChecker extends ASTVisitor[Unit, SignatureCheckerContext]
     }
   }
 
-  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode,
+  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode,
                                   context: SignatureCheckerContext): Unit = {
   }
 }

@@ -1,6 +1,6 @@
 package org.scala.checklist.ast.nodes
 
-import org.scala.checklist.ast.visitors.base.ASTVisitor
+import org.scala.checklist.ast.visitors.ASTVisitor
 
 class FuncDefinitionNode(val funcName: String, val arguments: List[VarDefinitionNode],
                          val body: BodyNode) extends ASTNode {

@@ -1,7 +1,7 @@
 package org.scala.checklist.ast.nodes.item
 
 import org.scala.checklist.ast.nodes.ASTNode
-import org.scala.checklist.ast.visitors.base.ASTVisitor
+import org.scala.checklist.ast.visitors.ASTVisitor
 
 
 
