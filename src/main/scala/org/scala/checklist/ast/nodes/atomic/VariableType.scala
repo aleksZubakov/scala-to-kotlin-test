@@ -1,4 +1,4 @@
-package org.scala.checklist.config
+package org.scala.checklist.ast.nodes.atomic
 
 object VariableType extends Enumeration {
   type VariableType = Value

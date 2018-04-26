@@ -1,6 +1,8 @@
 package org.scala.checklist.config
 
-import org.scala.checklist.config.VariableType.VariableType
+import org.scala.checklist.ast.nodes.atomic.VariableType
+import org.scala.checklist.ast.nodes.atomic.VariableType.VariableType
+import org.scala.checklist.exceptions.ConfigParseException
 
 
 case class ConfigEntry(varType: VariableType,
@@ -20,7 +22,6 @@ object Config {
       val varName = cols(0)
 
 
-
       val varType = parseVarType(cols(1))
       val varValue = if (cols.length < 3) {
         varName
@@ -37,9 +38,9 @@ object Config {
     varType match {
       case "число" => VariableType.Numeric
       case "строка" => VariableType.String
-      //    case _ => {
-      //      //TODO throw
-      //    }
+      case _ => {
+        throw ConfigParseException(s"Can't parse type ${varType} from config")
+      }
     }
   }
 }

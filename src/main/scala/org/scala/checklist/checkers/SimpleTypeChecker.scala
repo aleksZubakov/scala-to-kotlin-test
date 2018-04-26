@@ -1,16 +1,15 @@
 package org.scala.checklist.checkers
 
-import com.sun.tools.corba.se.idl.InvalidArgument
 import org.scala.checklist.ast.nodes._
-import org.scala.checklist.ast.nodes.atomic.AtomicNode
+import org.scala.checklist.ast.nodes.atomic.VariableType.VariableType
+import org.scala.checklist.ast.nodes.atomic.{AtomicNode, VariableType}
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, TextNode}
 import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOperation
 import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
 import org.scala.checklist.ast.nodes.operations._
 import org.scala.checklist.ast.visitors.ASTVisitor
-import org.scala.checklist.config.VariableType
-import org.scala.checklist.config.VariableType.VariableType
+import org.scala.checklist.exceptions.TypeCheckException
 
 
 class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableType]] {
@@ -74,7 +73,7 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
     val rightType = right.accept(this, context)
 
     if (leftType != rightType) {
-      throw new InvalidArgument("oop") // TODO NORMAL EXCEPTION
+      throw TypeCheckException("types of arithmetic expression are different")
     }
     leftType
   }
@@ -88,10 +87,8 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
     val leftType = left.accept(this, context)
     val rightType = right.accept(this, context)
 
-    if (leftType == VariableType.String
-      || rightType == VariableType.String
-      || leftType != rightType) { // TODO?
-      throw new InvalidArgument("oop") // TODO NORMAL EXCEPTION
+    if (leftType == VariableType.String || rightType == VariableType.String) {
+      throw TypeCheckException("types of arithmetic expression are different")
     }
     leftType
   }

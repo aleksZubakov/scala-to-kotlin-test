@@ -9,6 +9,7 @@ import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperatio
 import org.scala.checklist.ast.nodes.operations.{BooleanOpNode, ExpressionNode, LogicalOpNode}
 import org.scala.checklist.ast.nodes.{ASTNode, BodyNode, VarAssignmentNode, VarDefinitionNode}
 import org.scala.checklist.ast.visitors.ASTVisitor
+import org.scala.checklist.exceptions.NotFoundDeclarationException
 
 class AllVariablesDeclaredChecker extends ASTVisitor[Unit, Set[String]] {
   override def visitTemplateNode(text: TextNode, stmts: List[ASTNode], context: Set[String]): Unit = {
@@ -39,7 +40,7 @@ class AllVariablesDeclaredChecker extends ASTVisitor[Unit, Set[String]] {
 
   override def visitVarReferenceNode(name: String, context: Set[String]): Unit = {
     if (!context.contains(name)) {
-      throw new InvalidArgument("asdasd")
+      throw NotFoundDeclarationException(s"can't found declaration of variable $name", name)
     }
   }
 

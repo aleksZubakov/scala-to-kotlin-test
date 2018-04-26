@@ -8,7 +8,7 @@ import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperatio
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
 import org.scala.checklist.ast.nodes.operations._
 import org.scala.checklist.checkers.ScopeTableTypes.{FunctionTableWithDefinition, VariableTableInfo}
-import org.scala.checklist.config.VariableType.VariableType
+import org.scala.checklist.ast.nodes.atomic.VariableType.VariableType
 
 
 case class InterpretContext(howManySpaces: Int, functionTable: FunctionTableWithDefinition,

@@ -3,11 +3,10 @@ package org.scala.checklist.visitors.antlr
 import org.antlr.generated._
 import org.antlr.v4.runtime.tree.{ParseTree, TerminalNode}
 import org.scala.checklist.ast.nodes._
-import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode}
+import org.scala.checklist.ast.nodes.atomic.VariableType.VariableType
+import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode, VariableType}
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, ItemNode, PlaceholderNode, TextNode}
 import org.scala.checklist.ast.nodes.operations._
-import org.scala.checklist.config.VariableType
-import org.scala.checklist.config.VariableType.VariableType
 
 import scala.collection.JavaConversions._
 
@@ -241,4 +240,6 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   }
 
   def wordToString(word: CheckListParser.WordContext): String = word.CHAR.toList.mkString("")
+
+
 }

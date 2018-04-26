@@ -2,7 +2,8 @@ package org.scala.checklist.checkers
 
 import com.sun.tools.corba.se.idl.InvalidArgument
 import org.scala.checklist.ast.nodes._
-import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode}
+import org.scala.checklist.ast.nodes.atomic.VariableType.VariableType
+import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode, VariableType}
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, TextNode}
 import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOperation
 import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
@@ -10,8 +11,7 @@ import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperatio
 import org.scala.checklist.ast.nodes.operations.{BooleanOpNode, ExpressionNode, LogicalOpNode}
 import org.scala.checklist.ast.visitors.ASTVisitor
 import org.scala.checklist.checkers.ScopeTableTypes.{FunctionTable, VariableTable}
-import org.scala.checklist.config.VariableType
-import org.scala.checklist.config.VariableType.VariableType
+import org.scala.checklist.exceptions.InvalidFunctionCall
 
 
 package object ScopeTableTypes {
@@ -144,7 +144,7 @@ class FunctionSignatureChecker extends ASTVisitor[Unit, SignatureCheckerContext]
       case varRef: VarReferenceNode => variableTable.getOrElse(varRef.name, VariableType.Null)
     }
     if (functionSignature != argsTypes) {
-      throw new InvalidArgument("Whoops cannot call")
+      throw InvalidFunctionCall("oops invalid function call")
     }
   }
 
