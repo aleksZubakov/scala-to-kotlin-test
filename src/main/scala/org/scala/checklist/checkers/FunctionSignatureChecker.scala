@@ -6,8 +6,8 @@ import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarRe
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, TextNode}
 import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOperation
 import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
-import org.scala.checklist.ast.nodes.operations.{BooleanOpNode, ExpressionNode, LogicalOpNode}
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
+import org.scala.checklist.ast.nodes.operations.{BooleanOpNode, ExpressionNode, LogicalOpNode}
 import org.scala.checklist.ast.visitors.base.ASTVisitor
 import org.scala.checklist.checkers.ScopeTableTypes.{FunctionTable, VariableTable}
 import org.scala.checklist.config.VariableType
@@ -42,8 +42,21 @@ class FunctionSignatureChecker extends ASTVisitor[Unit, SignatureCheckerContext]
         globalContext = SignatureCheckerContext(newFuncTable, varTable)
         it.accept(this, globalContext)
       }
+
+      case varAssign: VarAssignmentNode => {
+        val varDef = varAssign.varDefinition
+        val SignatureCheckerContext(funcTable, varTable) = context
+
+        val newVariableTable = varTable + (varDef.varName -> varDef.varType)
+        globalContext = SignatureCheckerContext(funcTable, newVariableTable)
+      }
+
+      case stmt => stmt.accept(this, context)
+
       case el => el.accept(this, globalContext)
+
     }
+
   }
 
   override def visitItemNode(text: List[ItemElementNode], context: SignatureCheckerContext): Unit = {
@@ -55,7 +68,8 @@ class FunctionSignatureChecker extends ASTVisitor[Unit, SignatureCheckerContext]
     bodyNode.accept(this, context)
   }
 
-  override def visitTextNode(text: String, context: SignatureCheckerContext): Unit = {}
+  override def visitTextNode(text: String, context: SignatureCheckerContext): Unit = {
+  }
 
   override def visitBodyNode(items: List[ASTNode], context: SignatureCheckerContext): Unit = {
 
@@ -75,9 +89,11 @@ class FunctionSignatureChecker extends ASTVisitor[Unit, SignatureCheckerContext]
     }
   }
 
-  override def visitVarReferenceNode(name: String, context: SignatureCheckerContext): Unit = {}
+  override def visitVarReferenceNode(name: String, context: SignatureCheckerContext): Unit = {
+  }
 
-  override def visitDecimalConstNode(value: String, context: SignatureCheckerContext): Unit = {}
+  override def visitDecimalConstNode(value: String, context: SignatureCheckerContext): Unit = {
+  }
 
   override def visitLogicalOpNode(left: LogicalOpNode, op: LogicalOperation,
                                   right: LogicalOpNode, context: SignatureCheckerContext): Unit = {
@@ -130,5 +146,9 @@ class FunctionSignatureChecker extends ASTVisitor[Unit, SignatureCheckerContext]
     if (functionSignature != argsTypes) {
       throw new InvalidArgument("Whoops cannot call")
     }
+  }
+
+  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode,
+                                  context: SignatureCheckerContext): Unit = {
   }
 }

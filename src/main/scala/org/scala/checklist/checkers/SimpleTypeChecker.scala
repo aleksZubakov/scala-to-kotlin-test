@@ -120,6 +120,11 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
                                  context: Map[String, VariableType]): VariableType = {
     VariableType.Null
   }
+
+  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode,
+                                  context: Map[String, VariableType]): VariableType = {
+    VariableType.Null
+  }
 }
 
 

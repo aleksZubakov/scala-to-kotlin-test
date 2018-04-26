@@ -114,7 +114,7 @@ placeholder_body: arithmetic_expr;
 function_call: func_name=word '(' var_ref ')';
 var_ref: rvalue? | rvalue SPACES? (',' SPACES? rvalue)*;
 
-var_assign: var_def ':' SPACES? varValue=rvalue;
+var_assign: var_def ':' SPACES? varValue=rvalue NEWLINE;
 description: text+;
 var_def: description ':' SPACES? lval=word SPACES? ':' SPACES? varType=word SPACES?;
 rvalue: DECIMAL | word; //| arithmetic_expr;

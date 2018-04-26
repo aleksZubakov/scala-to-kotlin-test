@@ -38,4 +38,6 @@ trait ASTVisitor[T, -G] {
   def visitPlaceHolderNode(expr: ExpressionNode, context: G): T
 
   def visitFuncCallNode(funcReference: String, args: List[AtomicNode], context: G): T
+
+  def visitVarAssignment(varDefinition: VarDefinitionNode, value: AtomicNode, context: G): T
 }

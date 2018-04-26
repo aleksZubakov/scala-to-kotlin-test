@@ -3,8 +3,8 @@ package org.scala.checklist.app
 import org.antlr.generated._
 import org.antlr.v4.runtime.{CharStreams, CommonTokenStream}
 import org.scala.checklist.ast.visitors.base.{InterpretContext, InterpretVisitor}
-import org.scala.checklist.config.{Config, ConfigEntry}
 import org.scala.checklist.checkers.{FunctionSignatureChecker, SignatureCheckerContext, SimpleTypeChecker}
+import org.scala.checklist.config.{Config, ConfigEntry}
 import org.scala.checklist.visitors.antlr.AstTransformer
 
 object Interpreter {
@@ -31,9 +31,18 @@ object Interpreter {
   }
 }
 
-object MyMain extends App {
+object Main extends App {
+
+  override def main(args: Array[String]): Unit = {
+//    if (args.length == 2) {
+//      println("Нужно ровно два файла: <config_file> и <template_file>")
+//      return
+//    }
+//    val configFileName = args(0)
+//    val templateFileName = args(1)
+//
+//    Interpreter.run(templateFileName, configFileName)
     Interpreter.run("test.checklist", "test.config")
 
-
-
+  }
 }
