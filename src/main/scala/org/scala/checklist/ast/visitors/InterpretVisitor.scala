@@ -42,7 +42,7 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
         val newVariableTable = varTable + (varDef.varName -> (varDef.varType, value))
         globalContext = InterpretContext(spaces, funcTable, newVariableTable)
 
-        print(s"${varDef.description} : $value")
+        println(s"${varDef.description} : $value")
       }
 
       case stmt => stmt.accept(this, globalContext)

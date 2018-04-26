@@ -19,7 +19,7 @@ class AllVariablesDeclaredChecker extends ASTVisitor[Unit, Set[String]] {
         val varDef = varAssign.varDefinition
         globalContext += varDef.varName
       }
-      case stmt => stmt.accept(this, context)
+      case stmt => stmt.accept(this, globalContext)
     }
   }
 
