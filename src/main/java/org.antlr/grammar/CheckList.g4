@@ -122,6 +122,7 @@ rvalue: DECIMAL | word; //| arithmetic_expr;
 func_def: '$$' SPACES? name=word LPAREN args RPAREN body;
 args: arg? SPACES? (',' SPACES? arg)*; // check fun(, arg)
 arg: SPACES? lval=word SPACES? ':' SPACES? varType=word SPACES?;
+
 // template title/description
 heading: ('##') SPACES? (text)+ NEWLINE;
 

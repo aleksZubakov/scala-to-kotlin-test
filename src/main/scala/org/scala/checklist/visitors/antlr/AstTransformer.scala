@@ -31,8 +31,8 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   }
 
   override def visitBinaryExpression(ctx: CheckListParser.BinaryExpressionContext): ExpressionNode = {
-    val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
-    val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
+    val left = ctx.left.accept(this).asInstanceOf[LogicalOpNode]
+    val right = ctx.right.accept(this).asInstanceOf[LogicalOpNode]
 
     val op = ctx.op
     val opType = firstNotNull(op.AND(), op.OR()).asInstanceOf[TerminalNode].getSymbol.getType
@@ -44,7 +44,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   }
 
   override def visitNotExpression(ctx: CheckListParser.NotExpressionContext): ExpressionNode = {
-    new NotOpNode(ctx.logical_expr().accept(this).asInstanceOf[ExpressionNode])
+    new NotOpNode(ctx.logical_expr().accept(this).asInstanceOf[LogicalOpNode])
   }
 
   override def visitParenExpression(ctx: CheckListParser.ParenExpressionContext): ExpressionNode = {
@@ -88,7 +88,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     child match {
       case word: CheckListParser.WordContext => new VarReferenceNode(wordToString(word))
       case expr: CheckListParser.Arithmetic_exprContext => expr.accept(this).asInstanceOf[ExpressionNode]
-      case decimal: TerminalNode => new DecimalConstNode(decimal.toString.toDouble)
+      case decimal: TerminalNode => new DecimalConstNode(decimal.toString)
     }
   }
 
@@ -122,7 +122,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   }
 
   override def visitIf_stmt(ctx: CheckListParser.If_stmtContext): ASTNode = {
-    val dummyCondition = ctx.logical_expr().accept(this).asInstanceOf[ExpressionNode]
+    val dummyCondition = ctx.logical_expr().accept(this).asInstanceOf[BooleanOpNode]
     val body = visitBody(ctx.body())
     new IfNode(dummyCondition, body)
   }
@@ -206,7 +206,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
   override def visitRvalue(ctx: CheckListParser.RvalueContext): AtomicNode = {
     val op = firstNotNull(ctx.DECIMAL(), ctx.word())
     op match {
-      case decimal: TerminalNode => new DecimalConstNode(decimal.toString.toDouble)
+      case decimal: TerminalNode => new DecimalConstNode(decimal.toString)
       case word: CheckListParser.WordContext => new VarReferenceNode(wordToString(word))
     }
   }

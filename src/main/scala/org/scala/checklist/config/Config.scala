@@ -6,11 +6,7 @@ import org.scala.checklist.config.VariableType.VariableType
 case class ConfigEntry(varType: VariableType,
                        value: String)
 
-class Config private(val variables: Map[String, ConfigEntry]) {
-//  def variableType(varName: String): VariableType = {
-//
-//  }
-}
+class Config private(val variables: Map[String, ConfigEntry])
 
 
 object Config {
@@ -38,11 +34,11 @@ object Config {
 
   private def parseVarType(varType: String): VariableType = {
     varType match {
-    case "число" => VariableType.Numeric
-    case "строка" => VariableType.String
-//    case _ => {
-//      //TODO throw
-//    }
+      case "число" => VariableType.Numeric
+      case "строка" => VariableType.String
+      //    case _ => {
+      //      //TODO throw
+      //    }
     }
   }
 }

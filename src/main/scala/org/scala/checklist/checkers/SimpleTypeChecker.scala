@@ -1,4 +1,4 @@
-package org.scala.checklist.typechecker
+package org.scala.checklist.checkers
 
 import com.sun.tools.corba.se.idl.InvalidArgument
 import org.scala.checklist.ast.nodes._
@@ -36,7 +36,7 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
     VariableType.Null
   }
 
-  override def visitIfNode(condition: ExpressionNode, bodyNode: BodyNode,
+  override def visitIfNode(condition: BooleanOpNode, bodyNode: BodyNode,
                            context: Map[String, VariableType]): VariableType = {
     condition.accept(this, context)
     bodyNode.accept(this, context)
@@ -59,12 +59,12 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
     context.getOrElse(name, VariableType.Null)
   }
 
-  override def visitDecimalConstNode(value: Double, context: Map[String, VariableType]): VariableType = {
+  override def visitDecimalConstNode(value: String, context: Map[String, VariableType]): VariableType = {
     VariableType.Numeric
   }
 
-  override def visitLogicalOpNode(left: ExpressionNode, op: LogicalOperation,
-                                  right: ExpressionNode, context: Map[String, VariableType]): VariableType = {
+  override def visitLogicalOpNode(left: LogicalOpNode, op: LogicalOperation,
+                                  right: LogicalOpNode, context: Map[String, VariableType]): VariableType = {
     left.accept(this, context)
     right.accept(this, context)
   }
@@ -80,7 +80,7 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
     leftType
   }
 
-  override def visitNotOpNode(expr: ExpressionNode, context: Map[String, VariableType]): VariableType = {
+  override def visitNotOpNode(expr: LogicalOpNode, context: Map[String, VariableType]): VariableType = {
     expr.accept(this, context)
   }
 

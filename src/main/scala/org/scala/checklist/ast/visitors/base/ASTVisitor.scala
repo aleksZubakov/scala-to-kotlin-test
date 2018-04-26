@@ -4,7 +4,7 @@ import org.scala.checklist.ast.nodes.atomic.AtomicNode
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, TextNode}
 import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOperation
 import org.scala.checklist.ast.nodes.operations.CompareOperation.CompareOperation
-import org.scala.checklist.ast.nodes.operations.ExpressionNode
+import org.scala.checklist.ast.nodes.operations.{BooleanOpNode, ExpressionNode, LogicalOpNode}
 import org.scala.checklist.ast.nodes.operations.LogicalOperation.LogicalOperation
 import org.scala.checklist.ast.nodes.{ASTNode, BodyNode, VarDefinitionNode}
 
@@ -13,7 +13,7 @@ trait ASTVisitor[T, -G] {
 
   def visitItemNode(text: List[ItemElementNode], context: G): T
 
-  def visitIfNode(condition: ExpressionNode, bodyNode: BodyNode, context: G): T
+  def visitIfNode(condition: BooleanOpNode, bodyNode: BodyNode, context: G): T
 
   def visitTextNode(text: String, context: G): T
 
@@ -21,13 +21,13 @@ trait ASTVisitor[T, -G] {
 
   def visitVarReferenceNode(name: String, context: G): T
 
-  def visitDecimalConstNode(value: Double, context: G): T
+  def visitDecimalConstNode(value: String, context: G): T
 
-  def visitLogicalOpNode(left: ExpressionNode, op: LogicalOperation, right: ExpressionNode, context: G): T
+  def visitLogicalOpNode(left: LogicalOpNode, op: LogicalOperation, right: LogicalOpNode, context: G): T
 
   def visitCompareOpNode(left: ExpressionNode, op: CompareOperation, right: ExpressionNode, context: G): T
 
-  def visitNotOpNode(expr: ExpressionNode, context: G): T
+  def visitNotOpNode(expr: LogicalOpNode, context: G): T
 
   def visitArithmeticOpNode(left: ExpressionNode, op: ArithmeticOperation, right: ExpressionNode, context: G): T
 

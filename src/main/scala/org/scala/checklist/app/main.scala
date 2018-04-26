@@ -2,27 +2,37 @@ package org.scala.checklist.app
 
 import org.antlr.generated._
 import org.antlr.v4.runtime.{CharStreams, CommonTokenStream}
-import org.scala.checklist.config.VariableType.VariableType
+import org.scala.checklist.ast.visitors.base.{InterpretContext, InterpretVisitor}
 import org.scala.checklist.config.{Config, ConfigEntry}
-import org.scala.checklist.typechecker.ScopeTableTypes.{FunctionTable, VariableTable}
-import org.scala.checklist.typechecker.{Context, FunctionSignatureChecker, SimpleTypeChecker}
+import org.scala.checklist.checkers.{FunctionSignatureChecker, SignatureCheckerContext, SimpleTypeChecker}
 import org.scala.checklist.visitors.antlr.AstTransformer
 
-object MyMain extends App {
-  val lexer = new CheckListLexer(CharStreams.fromFileName("test.checklist"))
-  val tokenStream = new CommonTokenStream(lexer)
-  val parser = new CheckListParser(tokenStream)
+object Interpreter {
+  def run(templateFileName: String, configFileName: String): Unit = {
+    val lexer = new CheckListLexer(CharStreams.fromFileName("test.checklist"))
+    val tokenStream = new CommonTokenStream(lexer)
+    val parser = new CheckListParser(tokenStream)
 
-  val templateAst = parser.template().accept(new AstTransformer)
+    val templateAst = parser.template().accept(new AstTransformer)
 
-  val config = Config.buildFromFile("test.config")
+    val config = Config.buildFromFile("test.config")
 
-  val context = config.variables.map {
-    case (key: String, entry: ConfigEntry) => key -> entry.varType
+    val context = config.variables.map {
+      case (key: String, entry: ConfigEntry) => key -> entry.varType
+    }
+
+    templateAst.accept(new SimpleTypeChecker, context)
+    templateAst.accept(new FunctionSignatureChecker, SignatureCheckerContext(Map.empty, context))
+
+    val fullContext = config.variables.map {
+      case (key: String, entry: ConfigEntry) => key -> (entry.varType, entry.value)
+    }
+    templateAst.accept(new InterpretVisitor, InterpretContext(0, Map.empty, fullContext))
   }
+}
 
-  templateAst.accept(new SimpleTypeChecker, context)
-  templateAst.accept(FunctionSignatureChecker, Context(Map.empty, context))
+object MyMain extends App {
+    Interpreter.run("test.checklist", "test.config")
 
 
 
