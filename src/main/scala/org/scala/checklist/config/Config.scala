@@ -21,7 +21,6 @@ object Config {
     for (line <- source.getLines) {
       val cols = line.split(':').map(_.trim)
 
-      //      val description = cols(0)
       val varName = cols(0)
 
 

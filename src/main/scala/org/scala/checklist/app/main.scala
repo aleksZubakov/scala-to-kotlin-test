@@ -2,8 +2,10 @@ package org.scala.checklist.app
 
 import org.antlr.generated._
 import org.antlr.v4.runtime.{CharStreams, CommonTokenStream}
+import org.scala.checklist.config.VariableType.VariableType
 import org.scala.checklist.config.{Config, ConfigEntry}
-import org.scala.checklist.typechecker.SimpleTypeChecker
+import org.scala.checklist.typechecker.ScopeTableTypes.{FunctionTable, VariableTable}
+import org.scala.checklist.typechecker.{Context, FunctionSignatureChecker, SimpleTypeChecker}
 import org.scala.checklist.visitors.antlr.AstTransformer
 
 object MyMain extends App {
@@ -19,9 +21,9 @@ object MyMain extends App {
     case (key: String, entry: ConfigEntry) => key -> entry.varType
   }
 
-  SimpleTypeChecker.checkTypes(templateAst, context)
+  templateAst.accept(new SimpleTypeChecker, context)
+  templateAst.accept(FunctionSignatureChecker, Context(Map.empty, context))
 
 
-  //  templateAst.accept(new TypeAndConfigCheckListener(config))
 
 }

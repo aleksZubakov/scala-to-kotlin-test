@@ -228,11 +228,13 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     val nodes = ctx.children
       .filter(node => {
         node.isInstanceOf[CheckListParser.TextContext] ||
-          node.isInstanceOf[CheckListParser.PlaceholderContext]
+          node.isInstanceOf[CheckListParser.PlaceholderContext] ||
+          node.isInstanceOf[CheckListParser.Function_callContext]
       })
       .map {
         case text: CheckListParser.TextContext => visitText(text)
         case placeholder: CheckListParser.PlaceholderContext => visitPlaceholder(placeholder)
+        case funcCall: CheckListParser.Function_callContext => visitFunction_call(funcCall)
       }
     new ItemNode(nodes.toList)
   }

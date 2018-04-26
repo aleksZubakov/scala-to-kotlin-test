@@ -127,7 +127,7 @@ heading: ('##') SPACES? (text)+ NEWLINE;
 
 stmt: item | compound_stmt;
 
-item: (text | placeholder | function_call)+ NEWLINE;
+item: (function_call | text | placeholder)+ NEWLINE;
 
 compound_stmt: if_stmt | var_assign | func_def;
 

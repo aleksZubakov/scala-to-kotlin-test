@@ -1469,6 +1469,12 @@ public class CheckListParser extends Parser {
 
 	public static class ItemContext extends ParserRuleContext {
 		public TerminalNode NEWLINE() { return getToken(CheckListParser.NEWLINE, 0); }
+		public List<Function_callContext> function_call() {
+			return getRuleContexts(Function_callContext.class);
+		}
+		public Function_callContext function_call(int i) {
+			return getRuleContext(Function_callContext.class,i);
+		}
 		public List<TextContext> text() {
 			return getRuleContexts(TextContext.class);
 		}
@@ -1480,12 +1486,6 @@ public class CheckListParser extends Parser {
 		}
 		public PlaceholderContext placeholder(int i) {
 			return getRuleContext(PlaceholderContext.class,i);
-		}
-		public List<Function_callContext> function_call() {
-			return getRuleContexts(Function_callContext.class);
-		}
-		public Function_callContext function_call(int i) {
-			return getRuleContext(Function_callContext.class,i);
 		}
 		public ItemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1524,19 +1524,19 @@ public class CheckListParser extends Parser {
 				case 1:
 					{
 					setState(222);
-					text();
+					function_call();
 					}
 					break;
 				case 2:
 					{
 					setState(223);
-					placeholder();
+					text();
 					}
 					break;
 				case 3:
 					{
 					setState(224);
-					function_call();
+					placeholder();
 					}
 					break;
 				}
@@ -2645,8 +2645,8 @@ public class CheckListParser extends Parser {
 		"\u00d7\5\b\5\2\u00d6\u00d5\3\2\2\2\u00d7\u00d8\3\2\2\2\u00d8\u00d6\3\2"+
 		"\2\2\u00d8\u00d9\3\2\2\2\u00d9\u00da\3\2\2\2\u00da\u00db\7\34\2\2\u00db"+
 		"%\3\2\2\2\u00dc\u00df\5(\25\2\u00dd\u00df\5*\26\2\u00de\u00dc\3\2\2\2"+
-		"\u00de\u00dd\3\2\2\2\u00df\'\3\2\2\2\u00e0\u00e4\5\b\5\2\u00e1\u00e4\5"+
-		"\n\6\2\u00e2\u00e4\5\22\n\2\u00e3\u00e0\3\2\2\2\u00e3\u00e1\3\2\2\2\u00e3"+
+		"\u00de\u00dd\3\2\2\2\u00df\'\3\2\2\2\u00e0\u00e4\5\22\n\2\u00e1\u00e4"+
+		"\5\b\5\2\u00e2\u00e4\5\n\6\2\u00e3\u00e0\3\2\2\2\u00e3\u00e1\3\2\2\2\u00e3"+
 		"\u00e2\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5\u00e3\3\2\2\2\u00e5\u00e6\3\2"+
 		"\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00e8\7\34\2\2\u00e8)\3\2\2\2\u00e9\u00ed"+
 		"\5,\27\2\u00ea\u00ed\5\26\f\2\u00eb\u00ed\5\36\20\2\u00ec\u00e9\3\2\2"+
