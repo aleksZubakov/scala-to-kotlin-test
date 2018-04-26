@@ -15,13 +15,13 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
 
   override def visitTemplate(ctx: CheckListParser.TemplateContext): ASTNode = {
     val headingText = visitHeading(ctx.heading)
-    val stmts = ctx.stmt.map(visitStmt).toList
+    val stmts = ctx.stmt.filter(_.getChildCount > 0).map(visitStmt).toList
 
     new TemplateNode(headingText, stmts)
   }
 
   override def visitStmt(ctx: CheckListParser.StmtContext): ASTNode = {
-    val child = ctx.children.get(0)
+    val child = firstNotNull(ctx.item(), ctx.compound_stmt())
     child match {
       case item: CheckListParser.ItemContext => visitItem(item)
       case compoundStmt: CheckListParser.Compound_stmtContext => visitCompound_stmt(compoundStmt)

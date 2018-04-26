@@ -41,10 +41,11 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
         val value = unpackFromExpression(varAssign.value, globalContext)
         val newVariableTable = varTable + (varDef.varName -> (varDef.varType, value))
         globalContext = InterpretContext(spaces, funcTable, newVariableTable)
+
+        print(s"${varDef.description} : $value")
       }
 
       case stmt => stmt.accept(this, globalContext)
-      case el => el.accept(this, globalContext)
     }
 
   }
@@ -202,7 +203,7 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
     }
   }
 
-  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode, context: InterpretContext): Unit = ???
+
 
   override def visitVarReferenceNode(name: String, context: InterpretContext): Unit = ???
 
@@ -220,4 +221,6 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
 
   override def visitNegationOpNode(expr: ExpressionNode, context: InterpretContext): Unit = ???
 
+  override def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode,
+                                  context: InterpretContext): Unit = ???
 }

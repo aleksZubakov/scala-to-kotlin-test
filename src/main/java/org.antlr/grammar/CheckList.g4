@@ -101,10 +101,10 @@ SPACES
  ;
 
 CHAR: [а-яА-Я];
-PUNCTUATION: [.,;"!?\\|/];
+PUNCTUATION: [,!?|.];
 
 word: CHAR+;
-text: (word | SPACES | DECIMAL | PUNCTUATION);
+text: (word | PUNCTUATION  | DECIMAL | SPACES );
 placeholder: simple_placeholder| placeholder_with_body;
 simple_placeholder: '$' word;
 
@@ -124,11 +124,10 @@ args: arg? SPACES? (',' SPACES? arg)*; // check fun(, arg)
 arg: SPACES? lval=word SPACES? ':' SPACES? varType=word SPACES?;
 
 // template title/description
-heading: ('##') SPACES? (text)+ NEWLINE;
-
+heading: ('##') SPACES? text+ NEWLINE;
 stmt: item | compound_stmt;
 
-item: (function_call | text | placeholder)+ NEWLINE;
+item: (function_call | text | placeholder)+ NEWLINE+;
 
 compound_stmt: if_stmt | var_assign | func_def;
 

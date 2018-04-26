@@ -312,9 +312,9 @@ public class CheckListParser extends Parser {
 		public WordContext word() {
 			return getRuleContext(WordContext.class,0);
 		}
-		public TerminalNode SPACES() { return getToken(CheckListParser.SPACES, 0); }
-		public TerminalNode DECIMAL() { return getToken(CheckListParser.DECIMAL, 0); }
 		public TerminalNode PUNCTUATION() { return getToken(CheckListParser.PUNCTUATION, 0); }
+		public TerminalNode DECIMAL() { return getToken(CheckListParser.DECIMAL, 0); }
+		public TerminalNode SPACES() { return getToken(CheckListParser.SPACES, 0); }
 		public TextContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -349,10 +349,10 @@ public class CheckListParser extends Parser {
 				word();
 				}
 				break;
-			case SPACES:
+			case PUNCTUATION:
 				{
 				setState(84);
-				match(SPACES);
+				match(PUNCTUATION);
 				}
 				break;
 			case DECIMAL:
@@ -361,10 +361,10 @@ public class CheckListParser extends Parser {
 				match(DECIMAL);
 				}
 				break;
-			case PUNCTUATION:
+			case SPACES:
 				{
 				setState(86);
-				match(PUNCTUATION);
+				match(SPACES);
 				}
 				break;
 			default:
@@ -2616,7 +2616,7 @@ public class CheckListParser extends Parser {
 		"\2EC\3\2\2\2EF\3\2\2\2FH\3\2\2\2GE\3\2\2\2HJ\5$\23\2IK\5&\24\2JI\3\2\2"+
 		"\2KL\3\2\2\2LJ\3\2\2\2LM\3\2\2\2MN\3\2\2\2NO\7\2\2\3O\5\3\2\2\2PR\7\13"+
 		"\2\2QP\3\2\2\2RS\3\2\2\2SQ\3\2\2\2ST\3\2\2\2T\7\3\2\2\2UZ\5\6\4\2VZ\7"+
-		"\n\2\2WZ\7\33\2\2XZ\7\f\2\2YU\3\2\2\2YV\3\2\2\2YW\3\2\2\2YX\3\2\2\2Z\t"+
+		"\f\2\2WZ\7\33\2\2XZ\7\n\2\2YU\3\2\2\2YV\3\2\2\2YW\3\2\2\2YX\3\2\2\2Z\t"+
 		"\3\2\2\2[^\5\f\7\2\\^\5\16\b\2][\3\2\2\2]\\\3\2\2\2^\13\3\2\2\2_`\7\3"+
 		"\2\2`a\5\6\4\2a\r\3\2\2\2bc\7\3\2\2ce\7\4\2\2df\7\n\2\2ed\3\2\2\2ef\3"+
 		"\2\2\2fg\3\2\2\2gi\5\20\t\2hj\7\n\2\2ih\3\2\2\2ij\3\2\2\2jk\3\2\2\2kl"+
