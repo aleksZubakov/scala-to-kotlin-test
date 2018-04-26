@@ -24,7 +24,6 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
         val varDef = varAssign.varDefinition
         globalContext += varDef.varName -> varDef.varType
       }
-
       case stmt => stmt.accept(this, context)
     }
 
@@ -123,7 +122,7 @@ class SimpleTypeChecker extends ASTVisitor[VariableType, Map[String, VariableTyp
 
   override def visitVarAssignment(varDefinition: VarDefinitionNode, value: ExpressionNode,
                                   context: Map[String, VariableType]): VariableType = {
-    VariableType.Null
+    value.accept(this, context)
   }
 }
 
