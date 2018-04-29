@@ -184,6 +184,13 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code arithmeticMultDivExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code arithmeticAtomExpression}
 	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
 	 * @param ctx the parse tree
@@ -191,19 +198,19 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code arithmeticExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArithmeticExpression(CheckListParser.ArithmeticExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code arithmeticExpressionNegation}
 	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arithmeticPlusMinusExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CheckListParser#atom}.
 	 * @param ctx the parse tree
@@ -217,11 +224,17 @@ public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComparator(CheckListParser.ComparatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#arithmetic}.
+	 * Visit a parse tree produced by {@link CheckListParser#arithm_muldiv}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithmetic(CheckListParser.ArithmeticContext ctx);
+	T visitArithm_muldiv(CheckListParser.Arithm_muldivContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CheckListParser#arithm_plusminus}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CheckListParser#binary}.
 	 * @param ctx the parse tree

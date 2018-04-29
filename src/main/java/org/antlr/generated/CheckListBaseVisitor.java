@@ -213,6 +213,13 @@ public class CheckListBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -220,14 +227,14 @@ public class CheckListBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticExpression(CheckListParser.ArithmeticExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -248,7 +255,14 @@ public class CheckListBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmetic(CheckListParser.ArithmeticContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithm_muldiv(CheckListParser.Arithm_muldivContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

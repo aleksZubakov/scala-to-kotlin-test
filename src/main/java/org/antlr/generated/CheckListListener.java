@@ -298,6 +298,18 @@ public interface CheckListListener extends ParseTreeListener {
 	 */
 	void exitArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code arithmeticMultDivExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arithmeticMultDivExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code arithmeticAtomExpression}
 	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
 	 * @param ctx the parse tree
@@ -310,18 +322,6 @@ public interface CheckListListener extends ParseTreeListener {
 	 */
 	void exitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code arithmeticExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterArithmeticExpression(CheckListParser.ArithmeticExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arithmeticExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitArithmeticExpression(CheckListParser.ArithmeticExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code arithmeticExpressionNegation}
 	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
 	 * @param ctx the parse tree
@@ -333,6 +333,18 @@ public interface CheckListListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arithmeticPlusMinusExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arithmeticPlusMinusExpression}
+	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CheckListParser#atom}.
 	 * @param ctx the parse tree
@@ -354,15 +366,25 @@ public interface CheckListListener extends ParseTreeListener {
 	 */
 	void exitComparator(CheckListParser.ComparatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#arithmetic}.
+	 * Enter a parse tree produced by {@link CheckListParser#arithm_muldiv}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmetic(CheckListParser.ArithmeticContext ctx);
+	void enterArithm_muldiv(CheckListParser.Arithm_muldivContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#arithmetic}.
+	 * Exit a parse tree produced by {@link CheckListParser#arithm_muldiv}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmetic(CheckListParser.ArithmeticContext ctx);
+	void exitArithm_muldiv(CheckListParser.Arithm_muldivContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CheckListParser#arithm_plusminus}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CheckListParser#arithm_plusminus}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CheckListParser#binary}.
 	 * @param ctx the parse tree

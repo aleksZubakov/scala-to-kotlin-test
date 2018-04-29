@@ -144,7 +144,8 @@ logical_expr
 ;
 
 arithmetic_expr
- : left=arithmetic_expr SPACES? op=arithmetic  SPACES? right=arithmetic_expr    # arithmeticExpression
+ : left=arithmetic_expr SPACES? op=arithm_muldiv  SPACES? right=arithmetic_expr    # arithmeticMultDivExpression
+ | left=arithmetic_expr SPACES? op=arithm_plusminus  SPACES? right=arithmetic_expr  # arithmeticPlusMinusExpression
  | LPAREN SPACES? arithmetic_expr SPACES? RPAREN            # arithmeticExpressionParens
  | MINUS arithmetic_expr                                    # arithmeticExpressionNegation
  | atom                                                     # arithmeticAtomExpression
@@ -160,9 +161,8 @@ comparator
  : GT | GE | LT | LE | EQ
  ;
 
-arithmetic
- : MULT | DIV | PLUS | MINUS
- ;
+arithm_muldiv: MULT | DIV;
+arithm_plusminus: PLUS | MINUS;
 
 binary
  : AND | OR

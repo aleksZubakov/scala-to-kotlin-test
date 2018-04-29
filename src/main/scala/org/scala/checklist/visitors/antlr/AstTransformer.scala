@@ -1,11 +1,13 @@
 package org.scala.checklist.visitors.antlr
 
 import org.antlr.generated._
-import org.antlr.v4.runtime.tree.{ParseTree, TerminalNode}
+import org.antlr.v4.runtime.ParserRuleContext
+import org.antlr.v4.runtime.tree.{ParseTree, RuleNode, TerminalNode}
 import org.scala.checklist.ast.nodes._
 import org.scala.checklist.ast.nodes.atomic.VariableType.VariableType
 import org.scala.checklist.ast.nodes.atomic.{AtomicNode, DecimalConstNode, VarReferenceNode, VariableType}
 import org.scala.checklist.ast.nodes.item.{ItemElementNode, ItemNode, PlaceholderNode, TextNode}
+import org.scala.checklist.ast.nodes.operations.ArithmeticOperation.ArithmeticOperation
 import org.scala.checklist.ast.nodes.operations._
 
 import scala.collection.JavaConversions._
@@ -99,21 +101,52 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     ctx.atom().accept(this).asInstanceOf[ExpressionNode]
   }
 
-  override def visitArithmeticExpression(ctx: CheckListParser.ArithmeticExpressionContext): ArithmeticOpNode = {
+//  override def visitArithmeticExpression(ctx: CheckListParser.ArithmeticExpressionContext): ArithmeticOpNode = {
+//    val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
+//    val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
+//
+//    val op = ctx.op
+//    val opType = firstNotNull(op.DIV(), op.MINUS(), op.PLUS(), op.MULT())
+//      .asInstanceOf[TerminalNode].getSymbol.getType
+//
+//    opType match {
+//      case CheckListParser.MULT => new ArithmeticOpNode(left, ArithmeticOperation.MULT, right)
+//      case CheckListParser.DIV => new ArithmeticOpNode(left, ArithmeticOperation.DIV, right)
+//      case CheckListParser.PLUS => new ArithmeticOpNode(left, ArithmeticOperation.PLUS, right)
+//      case CheckListParser.MINUS => new ArithmeticOpNode(left, ArithmeticOperation.MINUS, right)
+//    }
+//
+//  }
+
+  override def visitArithmeticMultDivExpression(ctx: CheckListParser.ArithmeticMultDivExpressionContext): ArithmeticOpNode = {
+
     val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
     val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
 
     val op = ctx.op
-    val opType = firstNotNull(op.DIV(), op.MINUS(), op.PLUS(), op.MULT())
+    val opType = firstNotNull(op.DIV(), op.MULT())
       .asInstanceOf[TerminalNode].getSymbol.getType
 
-    opType match {
-      case CheckListParser.MULT => new ArithmeticOpNode(left, ArithmeticOperation.MULT, right)
-      case CheckListParser.DIV => new ArithmeticOpNode(left, ArithmeticOperation.DIV, right)
-      case CheckListParser.PLUS => new ArithmeticOpNode(left, ArithmeticOperation.PLUS, right)
-      case CheckListParser.MINUS => new ArithmeticOpNode(left, ArithmeticOperation.MINUS, right)
+    val arithmOp = opType match {
+      case CheckListParser.MULT => ArithmeticOperation.MULT
+      case CheckListParser.DIV => ArithmeticOperation.DIV
     }
+    new ArithmeticOpNode(left, arithmOp, right)
+  }
 
+  override def visitArithmeticPlusMinusExpression(ctx: CheckListParser.ArithmeticPlusMinusExpressionContext): ArithmeticOpNode = {
+    val left = ctx.left.accept(this).asInstanceOf[ExpressionNode]
+    val right = ctx.right.accept(this).asInstanceOf[ExpressionNode]
+
+    val op = ctx.op
+    val opType = firstNotNull(op.MINUS(), op.PLUS())
+      .asInstanceOf[TerminalNode].getSymbol.getType
+
+    val arithmOp = opType match {
+      case CheckListParser.MINUS => ArithmeticOperation.MINUS
+      case CheckListParser.PLUS => ArithmeticOperation.PLUS
+    }
+    new ArithmeticOpNode(left, arithmOp, right)
   }
 
   override def visitArithmeticExpressionNegation(ctx: CheckListParser.ArithmeticExpressionNegationContext): ExpressionNode = {
@@ -207,7 +240,7 @@ class AstTransformer extends CheckListBaseVisitor[ASTNode] {
     op match {
       case decimal: TerminalNode => new DecimalConstNode(decimal.toString)
       case word: CheckListParser.WordContext => new VarReferenceNode(wordToString(word))
-      case expr: CheckListParser.ArithmeticExpressionContext => visitArithmeticExpression(expr)
+      case expr: CheckListParser.Arithmetic_exprContext => expr.accept(this).asInstanceOf[ArithmeticOpNode]
     }
   }
 
