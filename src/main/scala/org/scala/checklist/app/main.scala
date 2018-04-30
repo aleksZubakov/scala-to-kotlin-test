@@ -18,7 +18,7 @@ object Interpreter {
       lexer.addErrorListener(SyntaxErrorListener.INSTANCE)
 
       val tokenStream = new CommonTokenStream(lexer)
-      val parser = new CheckListParser(tokenStream)
+      val parser = new CheckList(tokenStream)
       parser.removeErrorListeners()
       parser.addErrorListener(SyntaxErrorListener.INSTANCE)
 

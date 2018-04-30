@@ -17,257 +17,257 @@ public class CheckListBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFile_input(CheckListParser.File_inputContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTemplate(CheckList.TemplateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTemplate(CheckListParser.TemplateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPunc(CheckList.PuncContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWord(CheckListParser.WordContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWord(CheckList.WordContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitText(CheckListParser.TextContext ctx) { return visitChildren(ctx); }
+	@Override public T visitText(CheckList.TextContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPlaceholder(CheckListParser.PlaceholderContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPlaceholder(CheckList.PlaceholderContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSimple_placeholder(CheckListParser.Simple_placeholderContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSimple_placeholder(CheckList.Simple_placeholderContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPlaceholder_with_body(CheckListParser.Placeholder_with_bodyContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPlaceholder_with_body(CheckList.Placeholder_with_bodyContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPlaceholder_body(CheckListParser.Placeholder_bodyContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPlaceholder_body(CheckList.Placeholder_bodyContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunction_call(CheckListParser.Function_callContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunction_call(CheckList.Function_callContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVar_ref(CheckListParser.Var_refContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVar_ref(CheckList.Var_refContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVar_assign(CheckListParser.Var_assignContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVar_assign(CheckList.Var_assignContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDescription(CheckListParser.DescriptionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDescription(CheckList.DescriptionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVar_def(CheckListParser.Var_defContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVar_def(CheckList.Var_defContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRvalue(CheckListParser.RvalueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRvalue(CheckList.RvalueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunc_def(CheckListParser.Func_defContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunc_def(CheckList.Func_defContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArgs(CheckListParser.ArgsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArgs(CheckList.ArgsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArg(CheckListParser.ArgContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArg(CheckList.ArgContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHeading(CheckListParser.HeadingContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHeading(CheckList.HeadingContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmt(CheckListParser.StmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmt(CheckList.StmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitItem(CheckListParser.ItemContext ctx) { return visitChildren(ctx); }
+	@Override public T visitItem(CheckList.ItemContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCompound_stmt(CheckListParser.Compound_stmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCompound_stmt(CheckList.Compound_stmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIf_stmt(CheckListParser.If_stmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIf_stmt(CheckList.If_stmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBody(CheckListParser.BodyContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBody(CheckList.BodyContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBinaryExpression(CheckListParser.BinaryExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBinaryExpression(CheckList.BinaryExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNotExpression(CheckListParser.NotExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNotExpression(CheckList.NotExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParenExpression(CheckListParser.ParenExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParenExpression(CheckList.ParenExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitComparatorAtom(CheckListParser.ComparatorAtomContext ctx) { return visitChildren(ctx); }
+	@Override public T visitComparatorAtom(CheckList.ComparatorAtomContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticExpressionParens(CheckList.ArithmeticExpressionParensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticMultDivExpression(CheckList.ArithmeticMultDivExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticAtomExpression(CheckList.ArithmeticAtomExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticExpressionNegation(CheckList.ArithmeticExpressionNegationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithmeticPlusMinusExpression(CheckList.ArithmeticPlusMinusExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtom(CheckListParser.AtomContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtom(CheckList.AtomContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitComparator(CheckListParser.ComparatorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitComparator(CheckList.ComparatorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithm_muldiv(CheckListParser.Arithm_muldivContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithm_muldiv(CheckList.Arithm_muldivContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArithm_plusminus(CheckList.Arithm_plusminusContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBinary(CheckListParser.BinaryContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBinary(CheckList.BinaryContext ctx) { return visitChildren(ctx); }
 }

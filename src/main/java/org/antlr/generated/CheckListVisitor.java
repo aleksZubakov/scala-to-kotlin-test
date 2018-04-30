@@ -4,241 +4,241 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
  * This interface defines a complete generic visitor for a parse tree produced
- * by {@link CheckListParser}.
+ * by {@link CheckList}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
 public interface CheckListVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#file_input}.
+	 * Visit a parse tree produced by {@link CheckList#template}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFile_input(CheckListParser.File_inputContext ctx);
+	T visitTemplate(CheckList.TemplateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#template}.
+	 * Visit a parse tree produced by {@link CheckList#punc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTemplate(CheckListParser.TemplateContext ctx);
+	T visitPunc(CheckList.PuncContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#word}.
+	 * Visit a parse tree produced by {@link CheckList#word}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWord(CheckListParser.WordContext ctx);
+	T visitWord(CheckList.WordContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#text}.
+	 * Visit a parse tree produced by {@link CheckList#text}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitText(CheckListParser.TextContext ctx);
+	T visitText(CheckList.TextContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#placeholder}.
+	 * Visit a parse tree produced by {@link CheckList#placeholder}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPlaceholder(CheckListParser.PlaceholderContext ctx);
+	T visitPlaceholder(CheckList.PlaceholderContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#simple_placeholder}.
+	 * Visit a parse tree produced by {@link CheckList#simple_placeholder}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimple_placeholder(CheckListParser.Simple_placeholderContext ctx);
+	T visitSimple_placeholder(CheckList.Simple_placeholderContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#placeholder_with_body}.
+	 * Visit a parse tree produced by {@link CheckList#placeholder_with_body}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPlaceholder_with_body(CheckListParser.Placeholder_with_bodyContext ctx);
+	T visitPlaceholder_with_body(CheckList.Placeholder_with_bodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#placeholder_body}.
+	 * Visit a parse tree produced by {@link CheckList#placeholder_body}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPlaceholder_body(CheckListParser.Placeholder_bodyContext ctx);
+	T visitPlaceholder_body(CheckList.Placeholder_bodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#function_call}.
+	 * Visit a parse tree produced by {@link CheckList#function_call}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction_call(CheckListParser.Function_callContext ctx);
+	T visitFunction_call(CheckList.Function_callContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#var_ref}.
+	 * Visit a parse tree produced by {@link CheckList#var_ref}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVar_ref(CheckListParser.Var_refContext ctx);
+	T visitVar_ref(CheckList.Var_refContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#var_assign}.
+	 * Visit a parse tree produced by {@link CheckList#var_assign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVar_assign(CheckListParser.Var_assignContext ctx);
+	T visitVar_assign(CheckList.Var_assignContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#description}.
+	 * Visit a parse tree produced by {@link CheckList#description}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDescription(CheckListParser.DescriptionContext ctx);
+	T visitDescription(CheckList.DescriptionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#var_def}.
+	 * Visit a parse tree produced by {@link CheckList#var_def}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVar_def(CheckListParser.Var_defContext ctx);
+	T visitVar_def(CheckList.Var_defContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#rvalue}.
+	 * Visit a parse tree produced by {@link CheckList#rvalue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRvalue(CheckListParser.RvalueContext ctx);
+	T visitRvalue(CheckList.RvalueContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#func_def}.
+	 * Visit a parse tree produced by {@link CheckList#func_def}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunc_def(CheckListParser.Func_defContext ctx);
+	T visitFunc_def(CheckList.Func_defContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#args}.
+	 * Visit a parse tree produced by {@link CheckList#args}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArgs(CheckListParser.ArgsContext ctx);
+	T visitArgs(CheckList.ArgsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#arg}.
+	 * Visit a parse tree produced by {@link CheckList#arg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArg(CheckListParser.ArgContext ctx);
+	T visitArg(CheckList.ArgContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#heading}.
+	 * Visit a parse tree produced by {@link CheckList#heading}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHeading(CheckListParser.HeadingContext ctx);
+	T visitHeading(CheckList.HeadingContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#stmt}.
+	 * Visit a parse tree produced by {@link CheckList#stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmt(CheckListParser.StmtContext ctx);
+	T visitStmt(CheckList.StmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#item}.
+	 * Visit a parse tree produced by {@link CheckList#item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitItem(CheckListParser.ItemContext ctx);
+	T visitItem(CheckList.ItemContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#compound_stmt}.
+	 * Visit a parse tree produced by {@link CheckList#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCompound_stmt(CheckListParser.Compound_stmtContext ctx);
+	T visitCompound_stmt(CheckList.Compound_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#if_stmt}.
+	 * Visit a parse tree produced by {@link CheckList#if_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf_stmt(CheckListParser.If_stmtContext ctx);
+	T visitIf_stmt(CheckList.If_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#body}.
+	 * Visit a parse tree produced by {@link CheckList#body}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBody(CheckListParser.BodyContext ctx);
+	T visitBody(CheckList.BodyContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code binaryExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBinaryExpression(CheckListParser.BinaryExpressionContext ctx);
+	T visitBinaryExpression(CheckList.BinaryExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code notExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNotExpression(CheckListParser.NotExpressionContext ctx);
+	T visitNotExpression(CheckList.NotExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parenExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParenExpression(CheckListParser.ParenExpressionContext ctx);
+	T visitParenExpression(CheckList.ParenExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code comparatorAtom}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparatorAtom(CheckListParser.ComparatorAtomContext ctx);
+	T visitComparatorAtom(CheckList.ComparatorAtomContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arithmeticExpressionParens}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx);
+	T visitArithmeticExpressionParens(CheckList.ArithmeticExpressionParensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arithmeticMultDivExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx);
+	T visitArithmeticMultDivExpression(CheckList.ArithmeticMultDivExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arithmeticAtomExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx);
+	T visitArithmeticAtomExpression(CheckList.ArithmeticAtomExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arithmeticExpressionNegation}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx);
+	T visitArithmeticExpressionNegation(CheckList.ArithmeticExpressionNegationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arithmeticPlusMinusExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx);
+	T visitArithmeticPlusMinusExpression(CheckList.ArithmeticPlusMinusExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#atom}.
+	 * Visit a parse tree produced by {@link CheckList#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtom(CheckListParser.AtomContext ctx);
+	T visitAtom(CheckList.AtomContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#comparator}.
+	 * Visit a parse tree produced by {@link CheckList#comparator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparator(CheckListParser.ComparatorContext ctx);
+	T visitComparator(CheckList.ComparatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#arithm_muldiv}.
+	 * Visit a parse tree produced by {@link CheckList#arithm_muldiv}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithm_muldiv(CheckListParser.Arithm_muldivContext ctx);
+	T visitArithm_muldiv(CheckList.Arithm_muldivContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#arithm_plusminus}.
+	 * Visit a parse tree produced by {@link CheckList#arithm_plusminus}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx);
+	T visitArithm_plusminus(CheckList.Arithm_plusminusContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CheckListParser#binary}.
+	 * Visit a parse tree produced by {@link CheckList#binary}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBinary(CheckListParser.BinaryContext ctx);
+	T visitBinary(CheckList.BinaryContext ctx);
 }

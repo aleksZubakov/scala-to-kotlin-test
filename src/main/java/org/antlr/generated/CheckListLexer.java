@@ -1,4 +1,4 @@
-// Generated from /Users/alekseyzubakov/Documents/programming/internship_test/src/main/java/org.antlr/grammar/CheckList.g4 by ANTLR 4.7
+// Generated from /Users/alekseyzubakov/Documents/programming/internship_test/src/main/java/org.antlr/grammar/CheckListLexer.g4 by ANTLR 4.7
 package org.antlr.generated;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -17,10 +17,10 @@ public class CheckListLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, SPACES=8, CHAR=9, 
-		PUNCTUATION=10, AND=11, OR=12, NOT=13, GT=14, GE=15, LT=16, LE=17, EQ=18, 
-		LPAREN=19, RPAREN=20, MULT=21, DIV=22, PLUS=23, MINUS=24, DECIMAL=25, 
-		NEWLINE=26;
+		INDENT=1, DEDENT=2, COMMA=3, SPACES=4, CHAR=5, PUNCTUATION=6, AND=7, OR=8, 
+		NOT=9, GT=10, GE=11, LT=12, LE=13, EQ=14, LPAREN=15, RPAREN=16, MULT=17, 
+		DIV=18, PLUS=19, MINUS=20, LBRACE=21, RBRACE=22, HEADER=23, COLONS=24, 
+		DOLLAR=25, DOLLARS=26, DECIMAL=27, NEWLINE=28;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -30,20 +30,22 @@ public class CheckListLexer extends Lexer {
 	};
 
 	public static final String[] ruleNames = {
-		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "SPACES", "CHAR", 
-		"PUNCTUATION", "AND", "OR", "NOT", "GT", "GE", "LT", "LE", "EQ", "LPAREN", 
-		"RPAREN", "MULT", "DIV", "PLUS", "MINUS", "DECIMAL", "NEWLINE"
+		"COMMA", "SPACES", "CHAR", "PUNCTUATION", "AND", "OR", "NOT", "GT", "GE", 
+		"LT", "LE", "EQ", "LPAREN", "RPAREN", "MULT", "DIV", "PLUS", "MINUS", 
+		"LBRACE", "RBRACE", "HEADER", "COLONS", "DOLLAR", "DOLLARS", "DECIMAL", 
+		"NEWLINE"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'$'", "'{'", "'}'", "','", "':'", "'$$'", "'##'", null, null, null, 
-		"'&&'", "'||'", "'!'", "'>'", "'>='", "'<'", "'<='", "'=='", "'('", "')'", 
-		"'*'", "'/'", "'+'", "'-'"
+		null, null, null, "','", null, null, null, "'&&'", "'||'", "'!'", "'>'", 
+		"'>='", "'<'", "'<='", "'=='", "'('", "')'", "'*'", "'/'", "'+'", "'-'", 
+		"'{'", "'}'", "'##'", "':'", "'$'", "'$$'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, "SPACES", "CHAR", "PUNCTUATION", 
-		"AND", "OR", "NOT", "GT", "GE", "LT", "LE", "EQ", "LPAREN", "RPAREN", 
-		"MULT", "DIV", "PLUS", "MINUS", "DECIMAL", "NEWLINE"
+		null, "INDENT", "DEDENT", "COMMA", "SPACES", "CHAR", "PUNCTUATION", "AND", 
+		"OR", "NOT", "GT", "GE", "LT", "LE", "EQ", "LPAREN", "RPAREN", "MULT", 
+		"DIV", "PLUS", "MINUS", "LBRACE", "RBRACE", "HEADER", "COLONS", "DOLLAR", 
+		"DOLLARS", "DECIMAL", "NEWLINE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -108,7 +110,7 @@ public class CheckListLexer extends Lexer {
 	      }
 
 	      // first emit an extra line break that serves as the end of the statement
-	      this.emit(commonToken(CheckListParser.NEWLINE, "\n"));
+	      this.emit(commonToken(CheckList.NEWLINE, "\n"));
 
 	      // now emit as much DEDENT tokens as needed
 	      while (!indents.isEmpty()) {
@@ -117,7 +119,7 @@ public class CheckListLexer extends Lexer {
 	      }
 
 	      // put the EOF back on the token stream
-	      this.emit(commonToken(CheckListParser.EOF, "<EOF>"));
+	      this.emit(commonToken(CheckList.EOF, "<EOF>"));
 	    }
 
 	    Token next = super.nextToken();
@@ -131,7 +133,7 @@ public class CheckListLexer extends Lexer {
 	  }
 
 	  private Token createDedent() {
-	    CommonToken dedent = commonToken(CheckListParser.DEDENT, "");
+	    CommonToken dedent = commonToken(CheckList.DEDENT, "");
 	    dedent.setLine(this.lastToken.getLine());
 	    return dedent;
 	  }
@@ -169,7 +171,7 @@ public class CheckListLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "CheckList.g4"; }
+	public String getGrammarFileName() { return "CheckListLexer.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -216,7 +218,7 @@ public class CheckListLexer extends Lexer {
 			       }
 			       else if (indent > previous) {
 			         indents.push(indent);
-			         emit(commonToken(CheckListParser.INDENT, spaces));
+			         emit(commonToken(CheckList.INDENT, spaces));
 			       }
 			       else {
 			         // Possibly emit more than 1 DEDENT token.
@@ -247,47 +249,48 @@ public class CheckListLexer extends Lexer {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\34\u0091\b\1\4\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\36\u0093\b\1\4\2"+
 		"\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4"+
 		"\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22"+
 		"\t\22\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31"+
-		"\t\31\4\32\t\32\4\33\t\33\3\2\3\2\3\3\3\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7"+
-		"\3\7\3\7\3\b\3\b\3\b\3\t\6\tI\n\t\r\t\16\tJ\3\n\3\n\3\13\3\13\3\f\3\f"+
-		"\3\f\3\r\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\20\3\21\3\21\3\22\3\22"+
-		"\3\22\3\23\3\23\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\27\3\27\3\30\3\30"+
-		"\3\31\3\31\3\32\5\32s\n\32\3\32\6\32v\n\32\r\32\16\32w\3\32\3\32\6\32"+
-		"|\n\32\r\32\16\32}\5\32\u0080\n\32\3\33\3\33\3\33\5\33\u0085\n\33\3\33"+
-		"\3\33\5\33\u0089\n\33\3\33\5\33\u008c\n\33\5\33\u008e\n\33\3\33\3\33\2"+
-		"\2\34\3\3\5\4\7\5\t\6\13\7\r\b\17\t\21\n\23\13\25\f\27\r\31\16\33\17\35"+
-		"\20\37\21!\22#\23%\24\'\25)\26+\27-\30/\31\61\32\63\33\65\34\3\2\6\4\2"+
-		"\13\13\"\"\3\2\u0412\u0451\7\2##..\60\60AA~~\3\2\62;\2\u0099\2\3\3\2\2"+
-		"\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3"+
-		"\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3\2\2"+
-		"\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2\2\2%\3\2"+
-		"\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2\2\2\61\3\2"+
-		"\2\2\2\63\3\2\2\2\2\65\3\2\2\2\3\67\3\2\2\2\59\3\2\2\2\7;\3\2\2\2\t=\3"+
-		"\2\2\2\13?\3\2\2\2\rA\3\2\2\2\17D\3\2\2\2\21H\3\2\2\2\23L\3\2\2\2\25N"+
-		"\3\2\2\2\27P\3\2\2\2\31S\3\2\2\2\33V\3\2\2\2\35X\3\2\2\2\37Z\3\2\2\2!"+
-		"]\3\2\2\2#_\3\2\2\2%b\3\2\2\2\'e\3\2\2\2)g\3\2\2\2+i\3\2\2\2-k\3\2\2\2"+
-		"/m\3\2\2\2\61o\3\2\2\2\63r\3\2\2\2\65\u008d\3\2\2\2\678\7&\2\28\4\3\2"+
-		"\2\29:\7}\2\2:\6\3\2\2\2;<\7\177\2\2<\b\3\2\2\2=>\7.\2\2>\n\3\2\2\2?@"+
-		"\7<\2\2@\f\3\2\2\2AB\7&\2\2BC\7&\2\2C\16\3\2\2\2DE\7%\2\2EF\7%\2\2F\20"+
-		"\3\2\2\2GI\t\2\2\2HG\3\2\2\2IJ\3\2\2\2JH\3\2\2\2JK\3\2\2\2K\22\3\2\2\2"+
-		"LM\t\3\2\2M\24\3\2\2\2NO\t\4\2\2O\26\3\2\2\2PQ\7(\2\2QR\7(\2\2R\30\3\2"+
-		"\2\2ST\7~\2\2TU\7~\2\2U\32\3\2\2\2VW\7#\2\2W\34\3\2\2\2XY\7@\2\2Y\36\3"+
-		"\2\2\2Z[\7@\2\2[\\\7?\2\2\\ \3\2\2\2]^\7>\2\2^\"\3\2\2\2_`\7>\2\2`a\7"+
-		"?\2\2a$\3\2\2\2bc\7?\2\2cd\7?\2\2d&\3\2\2\2ef\7*\2\2f(\3\2\2\2gh\7+\2"+
-		"\2h*\3\2\2\2ij\7,\2\2j,\3\2\2\2kl\7\61\2\2l.\3\2\2\2mn\7-\2\2n\60\3\2"+
-		"\2\2op\7/\2\2p\62\3\2\2\2qs\7/\2\2rq\3\2\2\2rs\3\2\2\2su\3\2\2\2tv\t\5"+
-		"\2\2ut\3\2\2\2vw\3\2\2\2wu\3\2\2\2wx\3\2\2\2x\177\3\2\2\2y{\7\60\2\2z"+
-		"|\t\5\2\2{z\3\2\2\2|}\3\2\2\2}{\3\2\2\2}~\3\2\2\2~\u0080\3\2\2\2\177y"+
-		"\3\2\2\2\177\u0080\3\2\2\2\u0080\64\3\2\2\2\u0081\u0082\6\33\2\2\u0082"+
-		"\u008e\5\21\t\2\u0083\u0085\7\17\2\2\u0084\u0083\3\2\2\2\u0084\u0085\3"+
-		"\2\2\2\u0085\u0086\3\2\2\2\u0086\u0089\7\f\2\2\u0087\u0089\7\17\2\2\u0088"+
-		"\u0084\3\2\2\2\u0088\u0087\3\2\2\2\u0089\u008b\3\2\2\2\u008a\u008c\5\21"+
-		"\t\2\u008b\u008a\3\2\2\2\u008b\u008c\3\2\2\2\u008c\u008e\3\2\2\2\u008d"+
-		"\u0081\3\2\2\2\u008d\u0088\3\2\2\2\u008e\u008f\3\2\2\2\u008f\u0090\b\33"+
-		"\2\2\u0090\66\3\2\2\2\f\2Jrw}\177\u0084\u0088\u008b\u008d\3\3\33\2";
+		"\t\31\4\32\t\32\4\33\t\33\3\2\3\2\3\3\6\3;\n\3\r\3\16\3<\3\3\3\3\3\4\3"+
+		"\4\3\5\3\5\3\6\3\6\3\6\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\n\3\n\3\n\3\13\3"+
+		"\13\3\f\3\f\3\f\3\r\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\21\3\21\3"+
+		"\22\3\22\3\23\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\26\3\27\3\27\3\30\3"+
+		"\30\3\31\3\31\3\31\3\32\5\32u\n\32\3\32\6\32x\n\32\r\32\16\32y\3\32\3"+
+		"\32\6\32~\n\32\r\32\16\32\177\5\32\u0082\n\32\3\33\3\33\3\33\5\33\u0087"+
+		"\n\33\3\33\3\33\5\33\u008b\n\33\3\33\5\33\u008e\n\33\5\33\u0090\n\33\3"+
+		"\33\3\33\2\2\34\3\5\5\6\7\7\t\b\13\t\r\n\17\13\21\f\23\r\25\16\27\17\31"+
+		"\20\33\21\35\22\37\23!\24#\25%\26\'\27)\30+\31-\32/\33\61\34\63\35\65"+
+		"\36\3\2\6\4\2\13\13\"\"\3\2\u0412\u0451\6\2##\60\60==AA\3\2\62;\2\u009b"+
+		"\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2"+
+		"\2\2\2\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2"+
+		"\2\31\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2"+
+		"\2\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2"+
+		"\2\2\61\3\2\2\2\2\63\3\2\2\2\2\65\3\2\2\2\3\67\3\2\2\2\5:\3\2\2\2\7@\3"+
+		"\2\2\2\tB\3\2\2\2\13D\3\2\2\2\rG\3\2\2\2\17J\3\2\2\2\21L\3\2\2\2\23N\3"+
+		"\2\2\2\25Q\3\2\2\2\27S\3\2\2\2\31V\3\2\2\2\33Y\3\2\2\2\35[\3\2\2\2\37"+
+		"]\3\2\2\2!_\3\2\2\2#a\3\2\2\2%c\3\2\2\2\'e\3\2\2\2)g\3\2\2\2+i\3\2\2\2"+
+		"-l\3\2\2\2/n\3\2\2\2\61p\3\2\2\2\63t\3\2\2\2\65\u008f\3\2\2\2\678\7.\2"+
+		"\28\4\3\2\2\29;\t\2\2\2:9\3\2\2\2;<\3\2\2\2<:\3\2\2\2<=\3\2\2\2=>\3\2"+
+		"\2\2>?\b\3\2\2?\6\3\2\2\2@A\t\3\2\2A\b\3\2\2\2BC\t\4\2\2C\n\3\2\2\2DE"+
+		"\7(\2\2EF\7(\2\2F\f\3\2\2\2GH\7~\2\2HI\7~\2\2I\16\3\2\2\2JK\7#\2\2K\20"+
+		"\3\2\2\2LM\7@\2\2M\22\3\2\2\2NO\7@\2\2OP\7?\2\2P\24\3\2\2\2QR\7>\2\2R"+
+		"\26\3\2\2\2ST\7>\2\2TU\7?\2\2U\30\3\2\2\2VW\7?\2\2WX\7?\2\2X\32\3\2\2"+
+		"\2YZ\7*\2\2Z\34\3\2\2\2[\\\7+\2\2\\\36\3\2\2\2]^\7,\2\2^ \3\2\2\2_`\7"+
+		"\61\2\2`\"\3\2\2\2ab\7-\2\2b$\3\2\2\2cd\7/\2\2d&\3\2\2\2ef\7}\2\2f(\3"+
+		"\2\2\2gh\7\177\2\2h*\3\2\2\2ij\7%\2\2jk\7%\2\2k,\3\2\2\2lm\7<\2\2m.\3"+
+		"\2\2\2no\7&\2\2o\60\3\2\2\2pq\7&\2\2qr\7&\2\2r\62\3\2\2\2su\7/\2\2ts\3"+
+		"\2\2\2tu\3\2\2\2uw\3\2\2\2vx\t\5\2\2wv\3\2\2\2xy\3\2\2\2yw\3\2\2\2yz\3"+
+		"\2\2\2z\u0081\3\2\2\2{}\7\60\2\2|~\t\5\2\2}|\3\2\2\2~\177\3\2\2\2\177"+
+		"}\3\2\2\2\177\u0080\3\2\2\2\u0080\u0082\3\2\2\2\u0081{\3\2\2\2\u0081\u0082"+
+		"\3\2\2\2\u0082\64\3\2\2\2\u0083\u0084\6\33\2\2\u0084\u0090\5\5\3\2\u0085"+
+		"\u0087\7\17\2\2\u0086\u0085\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u0088\3"+
+		"\2\2\2\u0088\u008b\7\f\2\2\u0089\u008b\7\17\2\2\u008a\u0086\3\2\2\2\u008a"+
+		"\u0089\3\2\2\2\u008b\u008d\3\2\2\2\u008c\u008e\5\5\3\2\u008d\u008c\3\2"+
+		"\2\2\u008d\u008e\3\2\2\2\u008e\u0090\3\2\2\2\u008f\u0083\3\2\2\2\u008f"+
+		"\u008a\3\2\2\2\u0090\u0091\3\2\2\2\u0091\u0092\b\33\3\2\u0092\66\3\2\2"+
+		"\2\f\2<ty\177\u0081\u0086\u008a\u008d\u008f\4\2\3\2\3\33\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

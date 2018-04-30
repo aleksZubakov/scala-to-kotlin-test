@@ -4,395 +4,395 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
  * This interface defines a complete listener for a parse tree produced by
- * {@link CheckListParser}.
+ * {@link CheckList}.
  */
 public interface CheckListListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#file_input}.
+	 * Enter a parse tree produced by {@link CheckList#template}.
 	 * @param ctx the parse tree
 	 */
-	void enterFile_input(CheckListParser.File_inputContext ctx);
+	void enterTemplate(CheckList.TemplateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#file_input}.
+	 * Exit a parse tree produced by {@link CheckList#template}.
 	 * @param ctx the parse tree
 	 */
-	void exitFile_input(CheckListParser.File_inputContext ctx);
+	void exitTemplate(CheckList.TemplateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#template}.
+	 * Enter a parse tree produced by {@link CheckList#punc}.
 	 * @param ctx the parse tree
 	 */
-	void enterTemplate(CheckListParser.TemplateContext ctx);
+	void enterPunc(CheckList.PuncContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#template}.
+	 * Exit a parse tree produced by {@link CheckList#punc}.
 	 * @param ctx the parse tree
 	 */
-	void exitTemplate(CheckListParser.TemplateContext ctx);
+	void exitPunc(CheckList.PuncContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#word}.
+	 * Enter a parse tree produced by {@link CheckList#word}.
 	 * @param ctx the parse tree
 	 */
-	void enterWord(CheckListParser.WordContext ctx);
+	void enterWord(CheckList.WordContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#word}.
+	 * Exit a parse tree produced by {@link CheckList#word}.
 	 * @param ctx the parse tree
 	 */
-	void exitWord(CheckListParser.WordContext ctx);
+	void exitWord(CheckList.WordContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#text}.
+	 * Enter a parse tree produced by {@link CheckList#text}.
 	 * @param ctx the parse tree
 	 */
-	void enterText(CheckListParser.TextContext ctx);
+	void enterText(CheckList.TextContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#text}.
+	 * Exit a parse tree produced by {@link CheckList#text}.
 	 * @param ctx the parse tree
 	 */
-	void exitText(CheckListParser.TextContext ctx);
+	void exitText(CheckList.TextContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#placeholder}.
+	 * Enter a parse tree produced by {@link CheckList#placeholder}.
 	 * @param ctx the parse tree
 	 */
-	void enterPlaceholder(CheckListParser.PlaceholderContext ctx);
+	void enterPlaceholder(CheckList.PlaceholderContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#placeholder}.
+	 * Exit a parse tree produced by {@link CheckList#placeholder}.
 	 * @param ctx the parse tree
 	 */
-	void exitPlaceholder(CheckListParser.PlaceholderContext ctx);
+	void exitPlaceholder(CheckList.PlaceholderContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#simple_placeholder}.
+	 * Enter a parse tree produced by {@link CheckList#simple_placeholder}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimple_placeholder(CheckListParser.Simple_placeholderContext ctx);
+	void enterSimple_placeholder(CheckList.Simple_placeholderContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#simple_placeholder}.
+	 * Exit a parse tree produced by {@link CheckList#simple_placeholder}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimple_placeholder(CheckListParser.Simple_placeholderContext ctx);
+	void exitSimple_placeholder(CheckList.Simple_placeholderContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#placeholder_with_body}.
+	 * Enter a parse tree produced by {@link CheckList#placeholder_with_body}.
 	 * @param ctx the parse tree
 	 */
-	void enterPlaceholder_with_body(CheckListParser.Placeholder_with_bodyContext ctx);
+	void enterPlaceholder_with_body(CheckList.Placeholder_with_bodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#placeholder_with_body}.
+	 * Exit a parse tree produced by {@link CheckList#placeholder_with_body}.
 	 * @param ctx the parse tree
 	 */
-	void exitPlaceholder_with_body(CheckListParser.Placeholder_with_bodyContext ctx);
+	void exitPlaceholder_with_body(CheckList.Placeholder_with_bodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#placeholder_body}.
+	 * Enter a parse tree produced by {@link CheckList#placeholder_body}.
 	 * @param ctx the parse tree
 	 */
-	void enterPlaceholder_body(CheckListParser.Placeholder_bodyContext ctx);
+	void enterPlaceholder_body(CheckList.Placeholder_bodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#placeholder_body}.
+	 * Exit a parse tree produced by {@link CheckList#placeholder_body}.
 	 * @param ctx the parse tree
 	 */
-	void exitPlaceholder_body(CheckListParser.Placeholder_bodyContext ctx);
+	void exitPlaceholder_body(CheckList.Placeholder_bodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#function_call}.
+	 * Enter a parse tree produced by {@link CheckList#function_call}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunction_call(CheckListParser.Function_callContext ctx);
+	void enterFunction_call(CheckList.Function_callContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#function_call}.
+	 * Exit a parse tree produced by {@link CheckList#function_call}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunction_call(CheckListParser.Function_callContext ctx);
+	void exitFunction_call(CheckList.Function_callContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#var_ref}.
+	 * Enter a parse tree produced by {@link CheckList#var_ref}.
 	 * @param ctx the parse tree
 	 */
-	void enterVar_ref(CheckListParser.Var_refContext ctx);
+	void enterVar_ref(CheckList.Var_refContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#var_ref}.
+	 * Exit a parse tree produced by {@link CheckList#var_ref}.
 	 * @param ctx the parse tree
 	 */
-	void exitVar_ref(CheckListParser.Var_refContext ctx);
+	void exitVar_ref(CheckList.Var_refContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#var_assign}.
+	 * Enter a parse tree produced by {@link CheckList#var_assign}.
 	 * @param ctx the parse tree
 	 */
-	void enterVar_assign(CheckListParser.Var_assignContext ctx);
+	void enterVar_assign(CheckList.Var_assignContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#var_assign}.
+	 * Exit a parse tree produced by {@link CheckList#var_assign}.
 	 * @param ctx the parse tree
 	 */
-	void exitVar_assign(CheckListParser.Var_assignContext ctx);
+	void exitVar_assign(CheckList.Var_assignContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#description}.
+	 * Enter a parse tree produced by {@link CheckList#description}.
 	 * @param ctx the parse tree
 	 */
-	void enterDescription(CheckListParser.DescriptionContext ctx);
+	void enterDescription(CheckList.DescriptionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#description}.
+	 * Exit a parse tree produced by {@link CheckList#description}.
 	 * @param ctx the parse tree
 	 */
-	void exitDescription(CheckListParser.DescriptionContext ctx);
+	void exitDescription(CheckList.DescriptionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#var_def}.
+	 * Enter a parse tree produced by {@link CheckList#var_def}.
 	 * @param ctx the parse tree
 	 */
-	void enterVar_def(CheckListParser.Var_defContext ctx);
+	void enterVar_def(CheckList.Var_defContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#var_def}.
+	 * Exit a parse tree produced by {@link CheckList#var_def}.
 	 * @param ctx the parse tree
 	 */
-	void exitVar_def(CheckListParser.Var_defContext ctx);
+	void exitVar_def(CheckList.Var_defContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#rvalue}.
+	 * Enter a parse tree produced by {@link CheckList#rvalue}.
 	 * @param ctx the parse tree
 	 */
-	void enterRvalue(CheckListParser.RvalueContext ctx);
+	void enterRvalue(CheckList.RvalueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#rvalue}.
+	 * Exit a parse tree produced by {@link CheckList#rvalue}.
 	 * @param ctx the parse tree
 	 */
-	void exitRvalue(CheckListParser.RvalueContext ctx);
+	void exitRvalue(CheckList.RvalueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#func_def}.
+	 * Enter a parse tree produced by {@link CheckList#func_def}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunc_def(CheckListParser.Func_defContext ctx);
+	void enterFunc_def(CheckList.Func_defContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#func_def}.
+	 * Exit a parse tree produced by {@link CheckList#func_def}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunc_def(CheckListParser.Func_defContext ctx);
+	void exitFunc_def(CheckList.Func_defContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#args}.
+	 * Enter a parse tree produced by {@link CheckList#args}.
 	 * @param ctx the parse tree
 	 */
-	void enterArgs(CheckListParser.ArgsContext ctx);
+	void enterArgs(CheckList.ArgsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#args}.
+	 * Exit a parse tree produced by {@link CheckList#args}.
 	 * @param ctx the parse tree
 	 */
-	void exitArgs(CheckListParser.ArgsContext ctx);
+	void exitArgs(CheckList.ArgsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#arg}.
+	 * Enter a parse tree produced by {@link CheckList#arg}.
 	 * @param ctx the parse tree
 	 */
-	void enterArg(CheckListParser.ArgContext ctx);
+	void enterArg(CheckList.ArgContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#arg}.
+	 * Exit a parse tree produced by {@link CheckList#arg}.
 	 * @param ctx the parse tree
 	 */
-	void exitArg(CheckListParser.ArgContext ctx);
+	void exitArg(CheckList.ArgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#heading}.
+	 * Enter a parse tree produced by {@link CheckList#heading}.
 	 * @param ctx the parse tree
 	 */
-	void enterHeading(CheckListParser.HeadingContext ctx);
+	void enterHeading(CheckList.HeadingContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#heading}.
+	 * Exit a parse tree produced by {@link CheckList#heading}.
 	 * @param ctx the parse tree
 	 */
-	void exitHeading(CheckListParser.HeadingContext ctx);
+	void exitHeading(CheckList.HeadingContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#stmt}.
+	 * Enter a parse tree produced by {@link CheckList#stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmt(CheckListParser.StmtContext ctx);
+	void enterStmt(CheckList.StmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#stmt}.
+	 * Exit a parse tree produced by {@link CheckList#stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmt(CheckListParser.StmtContext ctx);
+	void exitStmt(CheckList.StmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#item}.
+	 * Enter a parse tree produced by {@link CheckList#item}.
 	 * @param ctx the parse tree
 	 */
-	void enterItem(CheckListParser.ItemContext ctx);
+	void enterItem(CheckList.ItemContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#item}.
+	 * Exit a parse tree produced by {@link CheckList#item}.
 	 * @param ctx the parse tree
 	 */
-	void exitItem(CheckListParser.ItemContext ctx);
+	void exitItem(CheckList.ItemContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#compound_stmt}.
+	 * Enter a parse tree produced by {@link CheckList#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterCompound_stmt(CheckListParser.Compound_stmtContext ctx);
+	void enterCompound_stmt(CheckList.Compound_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#compound_stmt}.
+	 * Exit a parse tree produced by {@link CheckList#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitCompound_stmt(CheckListParser.Compound_stmtContext ctx);
+	void exitCompound_stmt(CheckList.Compound_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#if_stmt}.
+	 * Enter a parse tree produced by {@link CheckList#if_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterIf_stmt(CheckListParser.If_stmtContext ctx);
+	void enterIf_stmt(CheckList.If_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#if_stmt}.
+	 * Exit a parse tree produced by {@link CheckList#if_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitIf_stmt(CheckListParser.If_stmtContext ctx);
+	void exitIf_stmt(CheckList.If_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#body}.
+	 * Enter a parse tree produced by {@link CheckList#body}.
 	 * @param ctx the parse tree
 	 */
-	void enterBody(CheckListParser.BodyContext ctx);
+	void enterBody(CheckList.BodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#body}.
+	 * Exit a parse tree produced by {@link CheckList#body}.
 	 * @param ctx the parse tree
 	 */
-	void exitBody(CheckListParser.BodyContext ctx);
+	void exitBody(CheckList.BodyContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code binaryExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterBinaryExpression(CheckListParser.BinaryExpressionContext ctx);
+	void enterBinaryExpression(CheckList.BinaryExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code binaryExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitBinaryExpression(CheckListParser.BinaryExpressionContext ctx);
+	void exitBinaryExpression(CheckList.BinaryExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code notExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterNotExpression(CheckListParser.NotExpressionContext ctx);
+	void enterNotExpression(CheckList.NotExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code notExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitNotExpression(CheckListParser.NotExpressionContext ctx);
+	void exitNotExpression(CheckList.NotExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parenExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterParenExpression(CheckListParser.ParenExpressionContext ctx);
+	void enterParenExpression(CheckList.ParenExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code parenExpression}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitParenExpression(CheckListParser.ParenExpressionContext ctx);
+	void exitParenExpression(CheckList.ParenExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code comparatorAtom}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparatorAtom(CheckListParser.ComparatorAtomContext ctx);
+	void enterComparatorAtom(CheckList.ComparatorAtomContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code comparatorAtom}
-	 * labeled alternative in {@link CheckListParser#logical_expr}.
+	 * labeled alternative in {@link CheckList#logical_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparatorAtom(CheckListParser.ComparatorAtomContext ctx);
+	void exitComparatorAtom(CheckList.ComparatorAtomContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arithmeticExpressionParens}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx);
+	void enterArithmeticExpressionParens(CheckList.ArithmeticExpressionParensContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code arithmeticExpressionParens}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmeticExpressionParens(CheckListParser.ArithmeticExpressionParensContext ctx);
+	void exitArithmeticExpressionParens(CheckList.ArithmeticExpressionParensContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arithmeticMultDivExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx);
+	void enterArithmeticMultDivExpression(CheckList.ArithmeticMultDivExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code arithmeticMultDivExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmeticMultDivExpression(CheckListParser.ArithmeticMultDivExpressionContext ctx);
+	void exitArithmeticMultDivExpression(CheckList.ArithmeticMultDivExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arithmeticAtomExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx);
+	void enterArithmeticAtomExpression(CheckList.ArithmeticAtomExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code arithmeticAtomExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmeticAtomExpression(CheckListParser.ArithmeticAtomExpressionContext ctx);
+	void exitArithmeticAtomExpression(CheckList.ArithmeticAtomExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arithmeticExpressionNegation}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx);
+	void enterArithmeticExpressionNegation(CheckList.ArithmeticExpressionNegationContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code arithmeticExpressionNegation}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmeticExpressionNegation(CheckListParser.ArithmeticExpressionNegationContext ctx);
+	void exitArithmeticExpressionNegation(CheckList.ArithmeticExpressionNegationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arithmeticPlusMinusExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx);
+	void enterArithmeticPlusMinusExpression(CheckList.ArithmeticPlusMinusExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code arithmeticPlusMinusExpression}
-	 * labeled alternative in {@link CheckListParser#arithmetic_expr}.
+	 * labeled alternative in {@link CheckList#arithmetic_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithmeticPlusMinusExpression(CheckListParser.ArithmeticPlusMinusExpressionContext ctx);
+	void exitArithmeticPlusMinusExpression(CheckList.ArithmeticPlusMinusExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#atom}.
+	 * Enter a parse tree produced by {@link CheckList#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtom(CheckListParser.AtomContext ctx);
+	void enterAtom(CheckList.AtomContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#atom}.
+	 * Exit a parse tree produced by {@link CheckList#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtom(CheckListParser.AtomContext ctx);
+	void exitAtom(CheckList.AtomContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#comparator}.
+	 * Enter a parse tree produced by {@link CheckList#comparator}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparator(CheckListParser.ComparatorContext ctx);
+	void enterComparator(CheckList.ComparatorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#comparator}.
+	 * Exit a parse tree produced by {@link CheckList#comparator}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparator(CheckListParser.ComparatorContext ctx);
+	void exitComparator(CheckList.ComparatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#arithm_muldiv}.
+	 * Enter a parse tree produced by {@link CheckList#arithm_muldiv}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithm_muldiv(CheckListParser.Arithm_muldivContext ctx);
+	void enterArithm_muldiv(CheckList.Arithm_muldivContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#arithm_muldiv}.
+	 * Exit a parse tree produced by {@link CheckList#arithm_muldiv}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithm_muldiv(CheckListParser.Arithm_muldivContext ctx);
+	void exitArithm_muldiv(CheckList.Arithm_muldivContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#arithm_plusminus}.
+	 * Enter a parse tree produced by {@link CheckList#arithm_plusminus}.
 	 * @param ctx the parse tree
 	 */
-	void enterArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx);
+	void enterArithm_plusminus(CheckList.Arithm_plusminusContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#arithm_plusminus}.
+	 * Exit a parse tree produced by {@link CheckList#arithm_plusminus}.
 	 * @param ctx the parse tree
 	 */
-	void exitArithm_plusminus(CheckListParser.Arithm_plusminusContext ctx);
+	void exitArithm_plusminus(CheckList.Arithm_plusminusContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CheckListParser#binary}.
+	 * Enter a parse tree produced by {@link CheckList#binary}.
 	 * @param ctx the parse tree
 	 */
-	void enterBinary(CheckListParser.BinaryContext ctx);
+	void enterBinary(CheckList.BinaryContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CheckListParser#binary}.
+	 * Exit a parse tree produced by {@link CheckList#binary}.
 	 * @param ctx the parse tree
 	 */
-	void exitBinary(CheckListParser.BinaryContext ctx);
+	void exitBinary(CheckList.BinaryContext ctx);
 }

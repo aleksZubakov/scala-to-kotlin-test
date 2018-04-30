@@ -62,7 +62,7 @@ class InterpretVisitor extends ASTVisitor[Unit, InterpretContext] {
   }
 
   override def visitTextNode(text: String, context: InterpretContext): Unit = {
-    print(text)
+    print(text + " ")
   }
 
   override def visitBodyNode(items: List[ASTNode], context: InterpretContext): Unit = {
